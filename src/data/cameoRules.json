@@ -1,0 +1,323 @@
+{
+  "groups": [
+    {
+      "id": "acyl_halides",
+      "name": "Acyl Halides & Acid Chlorides",
+      "cameoId": 1,
+      "description": "Highly reactive organic acid halides (e.g., Sebacoyl chloride, Acetyl chloride) that undergo violent nucleophilic acyl substitution."
+    },
+    {
+      "id": "halogenated_organic",
+      "name": "Halogenated Organic Compounds",
+      "cameoId": 17,
+      "description": "Chlorinated/brominated hydrocarbons (e.g., Dichloromethane, Chloroform) sensitive to active metals and caustics; persistent environmental toxins."
+    },
+    {
+      "id": "water_reactive",
+      "name": "Water-Reactive Substances",
+      "cameoId": 65,
+      "description": "Substances that react violently with moisture, generating toxic/corrosive gases or intense exothermic heat."
+    },
+    {
+      "id": "water_aqueous",
+      "name": "Water & Aqueous Solutions",
+      "cameoId": 66,
+      "description": "Water, aqueous buffers, saline, and water-based pharmaceutical formulations."
+    },
+    {
+      "id": "oxidizing_agents",
+      "name": "Strong Oxidizing Agents",
+      "cameoId": 44,
+      "description": "Electron acceptors (e.g., Hydrogen peroxide, Nitric acid, Potassium permanganate) capable of causing runaway combustion with organics."
+    },
+    {
+      "id": "reducing_agents",
+      "name": "Strong Reducing Agents",
+      "cameoId": 45,
+      "description": "Substances (e.g., Sodium borohydride, Hydrides, Sulfites) that release flammable hydrogen or react violently with oxidizers."
+    },
+    {
+      "id": "acids_inorganic",
+      "name": "Inorganic / Mineral Acids",
+      "cameoId": 2,
+      "description": "Strong mineral acids (e.g., Hydrochloric acid, Sulfuric acid, Phosphoric acid) that violently neutralize bases."
+    },
+    {
+      "id": "acids_organic",
+      "name": "Organic / Carboxylic Acids",
+      "cameoId": 3,
+      "description": "Carbon-based acids (e.g., Acetic acid, Citric acid, Formic acid) that react exothermically with bases and amines."
+    },
+    {
+      "id": "caustics_bases",
+      "name": "Caustics & Strong Bases",
+      "cameoId": 10,
+      "description": "Alkaline compounds (e.g., Sodium hydroxide, Potassium hydroxide, Ammonia) that react violently with acids and acyl halides."
+    },
+    {
+      "id": "alcohols",
+      "name": "Alcohols & Polyols",
+      "cameoId": 4,
+      "description": "Hydroxy compounds (e.g., Ethanol, Isopropanol, Methanol, Glycerol) susceptible to rapid esterification and flammability."
+    },
+    {
+      "id": "amines",
+      "name": "Amines & Nitrogenous Bases",
+      "cameoId": 7,
+      "description": "Organic amines and amino compounds (e.g., Triethylamine, Piperidine, APIs with amine motifs) acting as nucleophiles."
+    },
+    {
+      "id": "cyanides",
+      "name": "Cyanides & Nitriles",
+      "cameoId": 11,
+      "description": "Cyanide salts and organic nitriles capable of releasing lethal Hydrogen Cyanide (HCN) gas under acidic conditions."
+    },
+    {
+      "id": "sulfides",
+      "name": "Sulfides & Mercaptans",
+      "cameoId": 20,
+      "description": "Sulfur-containing reagents that generate toxic, asphyxiating Hydrogen Sulfide (H2S) gas when exposed to acids."
+    },
+    {
+      "id": "peroxides",
+      "name": "Peroxides & Hydroperoxides",
+      "cameoId": 30,
+      "description": "Unstable O-O bond compounds prone to friction/heat-induced explosive deflagration and violent oxidation."
+    },
+    {
+      "id": "flammables",
+      "name": "Flammable & Combustible Solvents",
+      "cameoId": 16,
+      "description": "Low-flashpoint organic solvents (e.g., Acetone, Hexane, Ethyl acetate, Ethanol) presenting vapor ignition hazards."
+    },
+    {
+      "id": "cytotoxics",
+      "name": "Cytotoxic & Antineoplastic Agents",
+      "cameoId": 99,
+      "description": "Genotoxic, mutagenic, or teratogenic antineoplastic pharmaceuticals (e.g., Cisplatin, Methotrexate, Doxorubicin) governed by USP <800>."
+    }
+  ],
+  "matrix": [
+    {
+      "group1": "acyl_halides",
+      "group2": "water_aqueous",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, T",
+      "hazardTitle": "Violent Hydrolysis & Corrosive HCl Release",
+      "description": "Acyl halides react violently and exothermically with water or aqueous drug solutions, generating dense, choking Hydrogen Chloride (HCl) acid vapor and boiling corrosive spray. High risk of vessel overpressurization.",
+      "segregationAction": "Store strictly under desiccated/dry conditions. NEVER dispose into aqueous waste sinks or wet carboys. Collect in dedicated anhydrous fluoropolymer/PTFE carboys for high-temperature hazardous waste incineration (>1200°C)."
+    },
+    {
+      "group1": "acyl_halides",
+      "group2": "water_reactive",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, T, F",
+      "hazardTitle": "Synergistic Moisture Reactivity Hazard",
+      "description": "Co-storing multiple water-reactive substances compounds the fire, thermal runaway, and toxic acid gas generation risk upon any atmospheric seal breach.",
+      "segregationAction": "Isolate in an airtight desiccator cabinet with secondary containment and inert nitrogen blanket."
+    },
+    {
+      "group1": "acyl_halides",
+      "group2": "caustics_bases",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, E",
+      "hazardTitle": "Violent Exothermic Neutralization",
+      "description": "Mixing strong bases with acyl halides causes an immediate, explosive exothermic runaway. The heat of reaction can boil solvents instantly and shatter glass vessels.",
+      "segregationAction": "Strict segregation into non-compatible waste streams. Neutralization must only be conducted in a controlled, ice-cooled jacketed reactor under slow stoichiometric addition."
+    },
+    {
+      "group1": "acyl_halides",
+      "group2": "alcohols",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, T",
+      "hazardTitle": "Rapid Exothermic Esterification & Gas Evolution",
+      "description": "Spontaneous reaction between acyl halides and alcohols generates ester compounds with intense heat and rapid evolution of anhydrous Hydrogen Chloride gas, causing severe pressure buildup in closed waste drums.",
+      "segregationAction": "Separate acyl halides completely from organic solvent/alcohol waste drums. Ensure waste drum has a pressure-relief safety cap."
+    },
+    {
+      "group1": "acyl_halides",
+      "group2": "amines",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, T",
+      "hazardTitle": "Violent Amidation & Salt Precipitation",
+      "description": "Vigorous nucleophilic attack by amines on acyl chlorides liberates immense heat, amine hydrochloride salt precipitate, and aerosolized toxic amine vapors.",
+      "segregationAction": "Collect amine-containing API waste separately from acid chlorides. Keep in segregated flammables/bases cabinet."
+    },
+    {
+      "group1": "caustics_bases",
+      "group2": "acids_inorganic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H",
+      "hazardTitle": "Violent Acid-Base Exotherm",
+      "description": "Mixing mineral acids and strong caustics triggers instant, extreme thermal discharge capable of boiling the liquid mixture, causing caustic steam eruptions and thermal burns.",
+      "segregationAction": "Store in separate, dedicated, corrosion-proof polypropylene cabinets (Blue = Acids, Red/White = Bases). Do not co-mingle in neutralization sumps without automated pH chilling controls."
+    },
+    {
+      "group1": "caustics_bases",
+      "group2": "acids_organic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H",
+      "hazardTitle": "Exothermic Neutralization & Splattering",
+      "description": "Rapid acid-base reaction generating significant heat. May cause volatile organic acid fumes to vaporize into the breathing zone.",
+      "segregationAction": "Segregate organic acids from caustic solutions. Dilute slowly before any regulated neutralization procedure."
+    },
+    {
+      "group1": "caustics_bases",
+      "group2": "halogenated_organic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "T, E",
+      "hazardTitle": "Dehydrohalogenation & Carboxylic Decomposition",
+      "description": "Caustics react with halogenated organics (e.g., Dichloromethane, Chloroform) via base-catalyzed dehydrohalogenation. Can produce toxic carbenes, phosgene gas traces, or spontaneous explosion under warm conditions.",
+      "segregationAction": "Never pour halogenated extraction solvents into caustic scrubbers or basic waste drums. Route to Dedicated Halogenated Organic Waste container."
+    },
+    {
+      "group1": "oxidizing_agents",
+      "group2": "flammables",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, F, E",
+      "hazardTitle": "Spontaneous Ignition & Catastrophic Deflagration",
+      "description": "Contact between strong oxidizers and flammable solvents provides an immediate oxidizer-fuel pair, causing rapid spontaneous ignition, flash fires, or detonation.",
+      "segregationAction": "Store oxidizers in dedicated oxidizer safety cabinets with at least 20 feet separation or fireproof partitions from flammable solvent stores. Never co-dispose into solvent drums."
+    },
+    {
+      "group1": "oxidizing_agents",
+      "group2": "reducing_agents",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, E, T",
+      "hazardTitle": "Runaway Redox Explosion",
+      "description": "Extremely vigorous redox reaction resulting in rapid decomposition, thermal shock wave, and toxic gas release.",
+      "segregationAction": "Store in physically isolated hazard compartments. Never mix residues in laboratory disposal containers."
+    },
+    {
+      "group1": "oxidizing_agents",
+      "group2": "alcohols",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, F",
+      "hazardTitle": "Exothermic Oxidation & Fire Hazard",
+      "description": "Strong oxidizers rapidly oxidize primary and secondary alcohols to aldehydes, carboxylic acids, and CO2 with high heat release and flash fire potential.",
+      "segregationAction": "Segregate alcohols into standard organic waste; oxidizers to designated heavy metal/inorganic oxidizer waste."
+    },
+    {
+      "group1": "oxidizing_agents",
+      "group2": "amines",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, T",
+      "hazardTitle": "Oxidative Amine Cleavage & Toxic NOx Liberation",
+      "description": "Oxidation of amines produces toxic nitrogen oxides (NO, NO2), carcinogenic nitrosamines, and extreme reaction heat.",
+      "segregationAction": "Isolate oxidizer waste from amino acids, peptide reagents, and amine solvent drums."
+    },
+    {
+      "group1": "acids_inorganic",
+      "group2": "cyanides",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "T",
+      "hazardTitle": "Fatal Hydrogen Cyanide (HCN) Gas Release",
+      "description": "Acidification of cyanides immediately releases volatile, lethal Hydrogen Cyanide gas, which inhibits cellular cytochrome c oxidase and causes fatal hypoxia within minutes.",
+      "segregationAction": "CRITICAL: Cyanide solutions must be maintained at pH > 11 at all times. Store in locked toxic poison cabinet. Segregate rigorously from all acids."
+    },
+    {
+      "group1": "acids_inorganic",
+      "group2": "sulfides",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "T",
+      "hazardTitle": "Lethal Hydrogen Sulfide (H2S) Gas Generation",
+      "description": "Acids protonate sulfides to release poisonous H2S gas with rotten egg odor followed by rapid olfactory paralysis and systemic asphyxiation.",
+      "segregationAction": "Maintain sulfide waste in basic conditions (pH > 10). Separate from all mineral and organic acid storage areas."
+    },
+    {
+      "group1": "cytotoxics",
+      "group2": "water_aqueous",
+      "status": "CONDITIONAL",
+      "severity": "CAUTION",
+      "hazardCode": "T",
+      "hazardTitle": "Biohazard Ecotoxicity & RCRA Violation",
+      "description": "Aqueous dilution does NOT eliminate antineoplastic toxicity. Discharging cytotoxic drugs (Cisplatin, Doxorubicin, Fluorouracil) into water/sewer violates EPA Clean Water Act and kills sewage biomes.",
+      "segregationAction": "MANDATORY: USP <800> compliance requires routing all antineoplastic solutions into rigid Yellow Cytotoxic Biohazard Buckets for high-temperature incineration at 1100°C. Never pour down sinks."
+    },
+    {
+      "group1": "cytotoxics",
+      "group2": "flammables",
+      "status": "CONDITIONAL",
+      "severity": "CAUTION",
+      "hazardCode": "T, F",
+      "hazardTitle": "Dual-Hazard Cytotoxic/Flammable Waste",
+      "description": "Combining cytotoxic active pharmaceutical ingredients with flammable solvents creates dual-hazard regulated waste requiring specialized licensed disposal.",
+      "segregationAction": "Label container clearly as 'Dual Hazard: Cytotoxic & Flammable Solvent'. Secure inside secondary steel containment and route to licensed hazardous waste incinerator."
+    },
+    {
+      "group1": "cytotoxics",
+      "group2": "halogenated_organic",
+      "status": "CONDITIONAL",
+      "severity": "CAUTION",
+      "hazardCode": "T",
+      "hazardTitle": "Halogenated Cytotoxic Mixture",
+      "description": "Heavy metal antineoplastics mixed with chlorinated solvents complicate waste incineration and thermal destruction monitoring.",
+      "segregationAction": "Segregate into 'Halogenated Cytotoxic Waste' container with explicit manifest tracking per USP <800> & RCRA Subpart P."
+    },
+    {
+      "group1": "alcohols",
+      "group2": "flammables",
+      "status": "COMPATIBLE",
+      "severity": "SAFE",
+      "hazardCode": "F",
+      "hazardTitle": "Miscible Flammable Solvents",
+      "description": "Alcohols and non-halogenated organic solvents are mutually miscible and do not exhibit dangerous chemical reactivity, but share high vapor pressure and flammability.",
+      "segregationAction": "Co-storage permitted in Non-Halogenated Organic Solvent carboy/drum. Must be grounded and bonded during transfer to eliminate static sparks."
+    },
+    {
+      "group1": "halogenated_organic",
+      "group2": "flammables",
+      "status": "CONDITIONAL",
+      "severity": "CAUTION",
+      "hazardCode": "T, F",
+      "hazardTitle": "Halogenated Dilution & Incinerator Acid Gas Scrubber Requirement",
+      "description": "Mixing halogenated solvents (e.g. DCM) into standard flammable solvents contaminates the solvent recovery stream, causing hydrochloric acid gas formation during combustion which corrodes standard incinerator linings.",
+      "segregationAction": "Keep Halogenated waste (>0.5% Cl) in a dedicated Halogenated Drum to avoid massive penalty fees and processing surcharges from waste disposal facilities."
+    },
+    {
+      "group1": "acids_inorganic",
+      "group2": "alcohols",
+      "status": "CONDITIONAL",
+      "severity": "CAUTION",
+      "hazardCode": "H",
+      "hazardTitle": "Acid-Catalyzed Dehydration & Mild Exotherm",
+      "description": "Concentrated mineral acids (especially sulfuric acid) can violently dehydrate alcohols into flammable alkene gases or ethers with significant heat generation.",
+      "segregationAction": "Dilute solutions before mixing; do not co-store concentrated mineral acids with large alcohol volumes."
+    },
+    {
+      "group1": "peroxides",
+      "group2": "flammables",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "hazardCode": "H, E, F",
+      "hazardTitle": "Explosive Peroxide Shock & Fire",
+      "description": "Organic peroxides are shock, friction, and heat-sensitive oxidizers. In the presence of flammable vapors, explosive detonation and violent combustion can occur spontaneously.",
+      "segregationAction": "Store in explosion-proof, temperature-controlled refrigerator (-20°C). Segregate from solvents. Test periodically for peroxidic crystallization."
+    },
+    {
+      "group1": "water_aqueous",
+      "group2": "flammables",
+      "status": "COMPATIBLE",
+      "severity": "SAFE",
+      "hazardCode": "None",
+      "hazardTitle": "Compatible Aqueous-Solvent Dilution",
+      "description": "Water reduces flashpoint hazards of water-miscible solvents (e.g., Ethanol, Isopropanol) without dangerous reactivity.",
+      "segregationAction": "Aqueous-solvent blends can be collected in solvent recovery drums if solvent concentration > 20%, or directed to pre-treatment if biodegradable."
+    }
+  ]
+}
+
