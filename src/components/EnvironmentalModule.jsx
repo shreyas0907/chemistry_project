@@ -625,3 +625,4 @@ export default function EnvironmentalModule({ inventory = [], onAddCompound }) {
     </div>
   );
 }
+

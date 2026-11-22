@@ -240,3 +240,4 @@ export default function ContainerQrModal({ chemical, isOpen, onClose, allInvento
     </div>
   );
 }
+

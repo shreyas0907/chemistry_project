@@ -218,6 +218,11 @@ export function evaluateMultiChemicalCompatibility(chemicals = []) {
       overallSeverity: "NEUTRAL",
       summary: "Select at least 2 chemicals to evaluate cross-reactivity, storage compatibility, and waste segregation.",
       pairInteractions: [],
+      pairAssessments: [],
+      redCount: 0,
+      amberCount: 0,
+      greenCount: 0,
+      unknownCount: 0,
       hasIncompatibility: false,
       hasUnknownData: false
     };
@@ -367,6 +372,7 @@ export function evaluateMultiChemicalCompatibility(chemicals = []) {
     overallBadgeText,
     summary,
     pairInteractions,
+    pairAssessments: pairInteractions,
     redCount,
     amberCount,
     greenCount,
@@ -534,3 +540,4 @@ export function queryAiSafetyAssistant(question = "", inventory = []) {
     disclaimer: "CHEM-SHIELD AI is a decision-support platform designed to assist certified safety engineers and industrial hygienists."
   };
 }
+

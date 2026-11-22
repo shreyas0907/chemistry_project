@@ -405,3 +405,4 @@ export default function IndustryModules({ inventory = [], onSelectChemical }) {
     </div>
   );
 }
+

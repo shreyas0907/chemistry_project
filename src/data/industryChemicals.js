@@ -537,3 +537,4 @@ export const INITIAL_INDUSTRIAL_INVENTORY = [
     handlingNotes: "Grounding wires required during pumping. Isolate from nitric acid and oxidizers."
   }
 ];
+

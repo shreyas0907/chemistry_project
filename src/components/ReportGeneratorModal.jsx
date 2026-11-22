@@ -318,3 +318,4 @@ export default function ReportGeneratorModal({ isOpen, onClose, inventory = [] }
     </div>
   );
 }
+

@@ -54,7 +54,8 @@ export default function App() {
   // Global Incompatibility count for navbar alert badge
   const globalIncompatibilities = useMemo(() => {
     const res = evaluateMultiChemicalCompatibility(inventory);
-    return res.pairAssessments.filter(p => p.status === 'RED');
+    const pairs = res?.pairInteractions || res?.pairAssessments || [];
+    return pairs.filter(p => p && p.status === 'RED');
   }, [inventory]);
 
   // Storage bay conflict violations count
