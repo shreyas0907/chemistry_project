@@ -15,7 +15,7 @@ import CompoundDetailModal from './components/CompoundDetailModal';
 import { INITIAL_INDUSTRIAL_INVENTORY } from './data/industryChemicals';
 import { evaluateMultiChemicalCompatibility, detectStorageBayViolations } from './services/chemicalSafetyEngine';
 
-const STORAGE_KEY = 'chem_shield_industrial_inventory_v3';
+const STORAGE_KEY = 'chem_shield_industrial_inventory_v4_master';
 
 export default function App() {
   const [inventory, setInventory] = useState(() => {
@@ -23,7 +23,7 @@ export default function App() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
+        if (Array.isArray(parsed) && parsed.length >= INITIAL_INDUSTRIAL_INVENTORY.length) {
           return parsed;
         }
       }

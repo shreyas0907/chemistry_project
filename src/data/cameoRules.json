@@ -4,7 +4,7 @@
       "id": "acyl_halides",
       "name": "Acyl Halides & Acid Chlorides",
       "cameoId": 1,
-      "description": "Highly reactive organic acid halides (e.g., Sebacoyl chloride, Acetyl chloride) that undergo violent nucleophilic acyl substitution."
+      "description": "Highly reactive organic acid halides (e.g., Sebacoyl chloride, Thionyl chloride) that undergo violent nucleophilic acyl substitution and moisture hydrolysis."
     },
     {
       "id": "halogenated_organic",
@@ -16,85 +16,145 @@
       "id": "water_reactive",
       "name": "Water-Reactive Substances",
       "cameoId": 65,
-      "description": "Substances that react violently with moisture, generating toxic/corrosive gases or intense exothermic heat."
+      "description": "Substances (e.g., NaBH4, LiAlH4, TDI, Sebacoyl chloride) that react violently with moisture, generating explosive H2 or choking acid mists."
     },
     {
       "id": "water_aqueous",
       "name": "Water & Aqueous Solutions",
       "cameoId": 66,
-      "description": "Water, aqueous buffers, saline, and water-based pharmaceutical formulations."
+      "description": "Water, aqueous buffers, saline, scrubber waters, and water-based chemical formulations."
+    },
+    {
+      "id": "oxidizers_strong",
+      "name": "Strong Oxidizing Agents",
+      "cameoId": 44,
+      "description": "Electron acceptors (e.g., Nitric acid 68%, Hydrogen peroxide 50%, Sodium hypochlorite, KMnO4) capable of causing runaway combustion with organics."
     },
     {
       "id": "oxidizing_agents",
-      "name": "Strong Oxidizing Agents",
+      "name": "General Oxidizing Agents",
       "cameoId": 44,
-      "description": "Electron acceptors (e.g., Nitric acid, Hydrogen peroxide, Potassium permanganate) capable of causing runaway combustion with organics."
+      "description": "Oxidizing compounds capable of accelerating combustion and oxidizing multivalent transition metals."
+    },
+    {
+      "id": "reducing_agents_strong",
+      "name": "Strong Reducing Agents & Hydrides",
+      "cameoId": 45,
+      "description": "Substances (e.g., Sodium borohydride, Lithium aluminum hydride) that release flammable hydrogen gas or react violently with oxidizers."
     },
     {
       "id": "reducing_agents",
-      "name": "Strong Reducing Agents",
+      "name": "General Reducing Agents",
       "cameoId": 45,
-      "description": "Substances (e.g., Sodium borohydride, Hydrides, Sulfites, Basic Chromium Sulfate) that release flammable hydrogen or react violently with oxidizers."
+      "description": "Mild reducing compounds and oxidizable multivalent salts (e.g., Basic Chromium Sulfate, Sulfites)."
     },
     {
       "id": "acids_inorganic",
       "name": "Inorganic / Mineral Acids",
       "cameoId": 2,
-      "description": "Strong mineral acids (e.g., Sulfuric acid, Hydrochloric acid, Nitric acid) that violently neutralize bases and protonate sulfides."
+      "description": "Strong mineral acids (e.g., Sulfuric acid 98%, Hydrochloric acid 35%, Nitric acid 68%, Phosphoric acid 85%) that violently neutralize bases and protonate sulfides."
     },
     {
       "id": "acids_organic",
       "name": "Organic / Carboxylic Acids",
       "cameoId": 3,
-      "description": "Carbon-based acids (e.g., Formic acid, Acetic acid, Glycolic acid, Citric acid) that react exothermically with bases and protonate sulfides."
+      "description": "Carbon-based acids (e.g., Formic acid, Glacial acetic acid, Glycolic acid, Salicylic acid) that react exothermically with bases and protonate sulfides."
     },
     {
       "id": "caustics_bases",
-      "name": "Caustics & Strong Bases",
+      "name": "Caustics & Strong Alkaline Bases",
       "cameoId": 10,
-      "description": "Alkaline compounds (e.g., Sodium hydroxide, Calcium hydroxide lime, Potassium hydroxide) that react violently with acids and acyl halides."
+      "description": "Alkaline compounds (e.g., Sodium hydroxide 50%, Calcium hydroxide lime, Sodium carbonate, Ammonia) that react violently with acids."
     },
     {
       "id": "alcohols",
       "name": "Alcohols & Polyols",
       "cameoId": 4,
-      "description": "Hydroxy compounds (e.g., Ethanol, Isopropanol, Phenoxyethanol, Glycerol) susceptible to rapid esterification and flammability."
+      "description": "Hydroxy compounds (e.g., Isopropanol, Methanol, Ethanol, Phenoxyethanol) susceptible to rapid esterification and flammability."
     },
     {
-      "id": "amines",
-      "name": "Amines & Nitrogenous Bases",
+      "id": "amines_aliphatic",
+      "name": "Aliphatic Amines & Organic Bases",
       "cameoId": 7,
-      "description": "Organic amines and amino compounds (e.g., Triethanolamine, Amoxicillin, Piperidine) acting as nucleophiles."
+      "description": "Organic amines (e.g., Triethylamine, Ammonium hydroxide) acting as strong nucleophiles."
     },
     {
       "id": "cyanides",
       "name": "Cyanides & Nitriles",
       "cameoId": 11,
-      "description": "Cyanide salts and organic nitriles capable of releasing lethal Hydrogen Cyanide (HCN) gas under acidic conditions."
+      "description": "Cyanide salts and organic nitriles (e.g., Acetonitrile) capable of releasing lethal Hydrogen Cyanide (HCN) gas under acidic conditions."
     },
     {
       "id": "sulfides",
       "name": "Sulfides & Hydrosulfides",
       "cameoId": 20,
-      "description": "Inorganic/organic sulfides (e.g., Sodium sulfide Na2S, NaHS) that release rapid lethal Hydrogen Sulfide (H2S) gas upon contact with acids."
+      "description": "Inorganic/organic sulfides (e.g., Sodium sulfide Na2S, Sodium hydrosulfide NaHS) that release instantaneous lethal Hydrogen Sulfide (H2S) gas upon contact with acids."
+    },
+    {
+      "id": "peroxides_organic",
+      "name": "Organic Peroxides",
+      "cameoId": 30,
+      "description": "Unstable O-O bond organic peroxides (e.g., Benzoyl peroxide 75%) prone to thermal runaway, explosive decomposition, and violent deflagration."
     },
     {
       "id": "peroxides",
-      "name": "Peroxides & Hydroperoxides",
+      "name": "Inorganic Peroxides",
       "cameoId": 30,
-      "description": "Unstable O-O bond compounds (e.g., Hydrogen peroxide 35%) prone to catalytic decomposition, violent oxidation, and runaway exotherm."
+      "description": "Hydrogen peroxide solutions prone to catalytic decomposition, violent oxidation, and steam overpressurization."
     },
     {
       "id": "flammables",
       "name": "Flammable & Combustible Solvents",
       "cameoId": 16,
-      "description": "Low-flashpoint organic solvents (e.g., Toluene, Acetone, Limonene, Ethanol) presenting severe fire and explosion hazards."
+      "description": "Low-flashpoint organic solvents (e.g., Isopropanol, Ethanol, THF, Limonene, Ethyl acetate) presenting severe vapor fire hazards."
+    },
+    {
+      "id": "hydrocarbons_aliphatic",
+      "name": "Aliphatic & Terpene Hydrocarbons",
+      "cameoId": 28,
+      "description": "Volatile fragrance terpenes and aliphatic hydrocarbons (e.g., Limonene) susceptible to rapid auto-oxidation and peroxide formation."
+    },
+    {
+      "id": "isocyanates",
+      "name": "Isocyanates",
+      "cameoId": 18,
+      "description": "Organic isocyanates (e.g., Toluene diisocyanate TDI) that react with water, amines, and bases with violent gas evolution and polymerization."
     },
     {
       "id": "cytotoxics",
       "name": "Cytotoxic & Antineoplastic Agents",
       "cameoId": 99,
       "description": "Genotoxic, mutagenic, or teratogenic antineoplastic pharmaceuticals (e.g., Cisplatin, Methotrexate) governed by USP <800>."
+    },
+    {
+      "id": "quaternary_ammonium",
+      "name": "Quaternary Ammonium Compounds",
+      "cameoId": 8,
+      "description": "Cationic conditioning surfactants (e.g., Cetrimonium chloride) incompatible with anionic detergents."
+    },
+    {
+      "id": "surfactants_anionic",
+      "name": "Anionic Surfactants",
+      "cameoId": 80,
+      "description": "Sulfated/sulfonated anionic surfactants (e.g., Sodium laureth sulfate SLES)."
+    },
+    {
+      "id": "aldehydes",
+      "name": "Aldehydes",
+      "cameoId": 5,
+      "description": "Carbonyl compounds (e.g., Formaldehyde 37%) that polymerize exothermically with acids and react with oxidizers."
+    },
+    {
+      "id": "ethers_peroxidizable",
+      "name": "Peroxidizable Ethers",
+      "cameoId": 14,
+      "description": "Volatile ethers (e.g., Tetrahydrofuran THF) prone to explosive auto-peroxidation on air exposure."
+    },
+    {
+      "id": "salts_neutral",
+      "name": "Neutral Salts & Minerals",
+      "cameoId": 64,
+      "description": "Inorganic sulfates, chlorides, and minerals without direct explosive cross-reactivity."
     }
   ],
   "matrix": [
@@ -107,9 +167,9 @@
       "hazardCode": "T, H",
       "hazardTitle": "FATAL ACCIDENT HAZARD: Instantaneous Lethal Hydrogen Sulfide (H2S) Gas Release",
       "chemicalEquation": "Na2S + H2SO4 -> Na2SO4 + H2S(g) ^",
-      "description": "Contact between inorganic sulfides (e.g., Sodium sulfide) and mineral acids (Sulfuric, Hydrochloric, Nitric) causes instantaneous liberation of lethal Hydrogen Sulfide (H2S) gas. H2S causes immediate olfactory nerve paralysis, pulmonary edema, rapid respiratory arrest, and death within 1-2 breaths at >500 ppm.",
-      "segregationAction": "MANDATORY ISOLATION: Store in separate dedicated bays with minimum 6 meters distance or a fire-rated barrier. Sulfide stores must have continuous H2S gas sensors with audible alarm interlocking to emergency scrubbers. NEVER co-mingle wastewater streams.",
-      "emergencyPrecautions": "Evacuate area immediately upwind. Wear positive-pressure SCBA. Do not enter without breathing apparatus. Neutralize spills strictly with alkaline oxidizing bleach solution (pH > 11), NEVER with acid.",
+      "description": "Contact between inorganic sulfides (Sodium sulfide, NaHS) and mineral acids (Sulfuric, Hydrochloric, Nitric, Phosphoric) causes instantaneous liberation of lethal, asphyxiating Hydrogen Sulfide (H2S) gas. H2S causes rapid olfactory nerve paralysis, pulmonary edema, and sudden collapse/death within 1-2 breaths at >500 ppm.",
+      "segregationAction": "MANDATORY ISOLATION: Store in separate dedicated bays with minimum 6 meters physical distance or a 1-hour fire-rated barrier. Sulfide stores must have continuous H2S sensors interlocking to emergency caustic scrubbers. NEVER co-mingle wastewater streams.",
+      "emergencyPrecautions": "Evacuate area immediately upwind. Wear positive-pressure SCBA. Neutralize spills strictly with alkaline oxidizing bleach solution (pH > 11), NEVER with acid.",
       "authoritativeSource": "NOAA CAMEO Chemicals / OSHA 29 CFR 1910.1200 / Tannery Safety Directive",
       "confidence": "Verified Empirical (Authoritative)"
     },
@@ -122,10 +182,100 @@
       "hazardCode": "T, H",
       "hazardTitle": "Lethal Hydrogen Sulfide (H2S) Gas Generation via Organic Acid Protonation",
       "chemicalEquation": "Na2S + 2 HCOOH -> 2 HCOONa + H2S(g) ^",
-      "description": "Organic carboxylic acids (Formic acid, Acetic acid, Glycolic acid) rapidly protonate sulfide salts, releasing toxic H2S gas and flammable organic fumes. Common fatal occurrence during leather pickling or deliming if liming liquor residue is present.",
+      "description": "Organic carboxylic acids (Formic acid, Glacial acetic acid, Glycolic acid) rapidly protonate sulfide salts, releasing toxic H2S gas and flammable organic fumes. Common fatal occurrence during leather pickling or deliming if liming liquor residue is present in drums.",
       "segregationAction": "Segregate organic acids in an acid-proof chemical store physically separated from sodium sulfide and liming chemical pallets.",
       "emergencyPrecautions": "Monitor air with portable multi-gas detector. Ensure continuous ventilation in leather drum unloading bays.",
       "authoritativeSource": "NOAA CAMEO Chemicals / Leather Technologists & Chemists Association Guide",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "sulfides",
+      "group2": "oxidizers_strong",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Chemical Reactivity & Thermal Runaway",
+      "hazardCode": "F, E, T",
+      "hazardTitle": "Violent Exothermic Oxidation, Flash Fire & Toxic Sulfur Dioxide Cloud",
+      "chemicalEquation": "Na2S + 4 H2O2 -> Na2SO4 + 4 H2O + Extreme Heat",
+      "description": "Mixing solid sulfides with strong oxidizers (Hydrogen peroxide, Nitric acid, Sodium hypochlorite, KMnO4) produces an extremely violent exothermic redox reaction capable of boiling solutions, erupting corrosive liquid spray, and releasing toxic SO2 and H2S gases.",
+      "segregationAction": "Store sulfides in dedicated alkaline bay at least 8 meters away from oxidizer bunkers.",
+      "emergencyPrecautions": "Flood with massive water deluge from safe distance. Wear full chemical splash suit and SCBA.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / NFPA 400 Hazardous Materials Code",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "oxidizers_strong",
+      "group2": "flammables",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Storage Incompatibility & Deflagration Fire",
+      "hazardCode": "F, E",
+      "hazardTitle": "Auto-Ignition, Runaway Deflagration & Severe Industrial Fire",
+      "chemicalEquation": "Oxidizer + Flammable Solvent -> CO2 + H2O + Spontaneous Thermal Explosion",
+      "description": "Strong oxidizers (Nitric acid 68%, H2O2 50%, Sodium hypochlorite, KMnO4) react exothermically with low-flashpoint flammable solvents (IPA, Ethanol, Methanol, THF, Ethyl acetate, Limonene). Vapors auto-ignite spontaneously causing devastating warehouse fires.",
+      "segregationAction": "NFPA 400 MANDATE: Minimum 20 feet (6.1 meters) separation distance or a 1-hour fire-rated barrier wall between Class 5.1 oxidizers and Class 3 flammable liquids.",
+      "emergencyPrecautions": "Use foam/water fog suppression. Eliminate all potential electrical and mechanical ignition sources.",
+      "authoritativeSource": "NFPA 400 / OSHA 1910.1200 / NOAA CAMEO Chemicals",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "oxidizers_strong",
+      "group2": "hydrocarbons_aliphatic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Cosmetic Bulk Storage Runaway Exotherm",
+      "hazardCode": "F, E",
+      "hazardTitle": "Terpene Hydroperoxide Auto-Catalytic Runaway & Explosion",
+      "chemicalEquation": "C10H16 (Limonene) + H2O2 (50%) -> Polyperoxides + Rapid Deflagration",
+      "description": "In cosmetic manufacturing warehouses, storing concentrated bulk Hydrogen peroxide adjacent to fragrance terpenes (Limonene, Linalool) creates an extreme auto-oxidation hazard. Terpenes form unstable cyclic peroxides that detonate under mild heat.",
+      "segregationAction": "Store concentrated hydrogen peroxide in an isolated cold-storage bunker (< 20°C) with self-venting caps. Fragrance terpenes must reside in a separate flame-proof solvent room.",
+      "emergencyPrecautions": "Cool drum exteriors with water spray. Evacuate warehouse immediately if temperature rise is detected.",
+      "authoritativeSource": "Cosmetics Industry Safety Consortium / NOAA CAMEO",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "oxidizers_strong",
+      "group2": "reducing_agents",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Chemical Reactivity & Toxic Hexavalent Chromium Formation",
+      "hazardCode": "T, E",
+      "hazardTitle": "Hazardous Cr(VI) Oxidation & Violent Redox Exotherm",
+      "chemicalEquation": "2 Cr(OH)SO4 + 3 H2O2 + 4 NaOH -> 2 Na2CrO4 (Cr VI) + 2 Na2SO4 + 8 H2O",
+      "description": "Mixing Basic Chromium Sulfate Cr(III) with strong oxidizers (Hydrogen peroxide, Bleach, Nitric acid) oxidizes benign trivalent chromium into Carcinogenic, Mutagenic Hexavalent Chromium Cr(VI). A critical environmental and biological contamination risk.",
+      "segregationAction": "Strictly segregate chromium tanning powders from oxidizer bunkers. Never co-mingle wastewater before chrome precipitation recovery is complete.",
+      "emergencyPrecautions": "Treat any accidental cross-mix with reducing agents (Sodium bisulfite, FeSO4) at pH < 3 to reduce Cr(VI) back to Cr(III).",
+      "authoritativeSource": "Leather Working Group (LWG) Chemical Management Standard / EPA",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "reducing_agents_strong",
+      "group2": "water_aqueous",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Water-Reactive Explosive Gas Liberation",
+      "hazardCode": "F, E, H",
+      "hazardTitle": "Violent Hydrogen (H2) Gas Explosion & Flash Fire",
+      "chemicalEquation": "NaBH4 + 4 H2O -> NaB(OH)4 + 4 H2(g) ^ + Rapid Exotherm",
+      "description": "Hydride reducing agents (Sodium borohydride, Lithium aluminum hydride) react violently upon contact with water, steam, or aqueous moisture, evolving large volumes of explosive Hydrogen gas and generating intense heat that ignites the gas.",
+      "segregationAction": "Store in hermetically sealed metal drums under dry nitrogen blanket in an isolated moisture-free room. Prohibit fire sprinkler water in hydride storage rooms (Class D powder only).",
+      "emergencyPrecautions": "NEVER use water or CO2 fire extinguishers. Smother fires exclusively with Class D dry powder (Met-L-X or dry sodium chloride).",
+      "authoritativeSource": "NOAA CAMEO Chemicals / NFPA 400 / OSHA 1910.1200",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "reducing_agents_strong",
+      "group2": "acids_inorganic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Violent Exothermic Hydrogen Blast",
+      "hazardCode": "F, E, H",
+      "hazardTitle": "Explosive Hydrogen Blast & Corrosive Mist Eruption",
+      "chemicalEquation": "2 NaBH4 + H2SO4 -> Na2SO4 + B2H6 / 4 H2(g) ^",
+      "description": "Contact between hydrides and mineral acids causes an instantaneous, explosive burst of hydrogen and potentially toxic borane gases, blowing out reactor vessel relief discs.",
+      "segregationAction": "Physically isolate hydrides from all acid drum storage by at least 10 meters.",
+      "emergencyPrecautions": "Evacuate area immediately. Shut off master electrical feeds to prevent ignition of hydrogen cloud.",
+      "authoritativeSource": "Bretherick's Handbook of Reactive Chemical Hazards / NOAA CAMEO",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
@@ -133,14 +283,14 @@
       "group2": "water_aqueous",
       "status": "INCOMPATIBLE",
       "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Storage Incompatibility",
+      "incompatibilityType": "Chemical Reactivity & Pressure Vessel Rupture",
       "hazardCode": "H, T",
       "hazardTitle": "Violent Hydrolysis, Pressure Blowout & Choking HCl Acid Release",
-      "chemicalEquation": "R-COCl + H2O -> R-COOH + HCl(g) ^ + Heat",
-      "description": "Acyl halides react violently and exothermically with water or moisture, generating boiling corrosive liquid spray and dense clouds of toxic, choking Hydrogen Chloride (HCl) gas. In sealed drums, the sudden pressure surge causes vessel rupture.",
-      "segregationAction": "Store strictly under desiccated, moisture-free nitrogen blankets. NEVER dispose into aqueous waste sinks, floor drains, or wet carboys.",
-      "emergencyPrecautions": "Use anhydrous soda ash or dry sand for spills. Avoid water sprays directly on spill.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / Prudent Practices in the Laboratory (NRC)",
+      "chemicalEquation": "C10H16Cl2O2 + 2 H2O -> C10H18O4 + 2 HCl(g) ^ + Heat",
+      "description": "Acyl halides (Sebacoyl chloride, Thionyl chloride) react violently with water or moisture, releasing dense plumes of choking Hydrogen Chloride (HCl) gas and rapidly overpressurizing closed drums.",
+      "segregationAction": "Store under dry inert gas with airtight desiccant caps. Isolate from aqueous storage tanks.",
+      "emergencyPrecautions": "Wear acid-gas respirator or SCBA. Vent reactor vessel only into caustic scrubbers.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / ACS Chemical Safety Manual",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
@@ -148,164 +298,119 @@
       "group2": "caustics_bases",
       "status": "INCOMPATIBLE",
       "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Process Incompatibility",
+      "incompatibilityType": "Violent Exothermic Neutralization",
       "hazardCode": "H, E",
-      "hazardTitle": "Runaway Exothermic Neutralization & Corrosive Splattering",
-      "chemicalEquation": "R-COCl + 2 NaOH -> R-COONa + NaCl + H2O + Extreme Heat",
-      "description": "Mixing strong caustics directly with acyl halides causes an uncontrollable thermal explosion. The rapid temperature spike instantly vaporizes volatile liquids and propels caustic droplets.",
-      "segregationAction": "Strict physical segregation. Controlled neutralization requires chilled jacketed reactors with dropwise stoichiometric addition.",
-      "emergencyPrecautions": "Full chemical splash suit, neoprene apron, face shield, and chemical-resistant footwear required.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / Bretherick's Handbook of Reactive Chemical Hazards",
+      "hazardTitle": "Runaway Exotherm & Corrosive Hot Liquid Splattering",
+      "chemicalEquation": "R-COCl + NaOH -> R-COONa + NaCl + Boiling Steam",
+      "description": "Direct mixing of concentrated acid halides with strong caustic lye causes instantaneous thermal runaway, explosive boiling, and violent expulsion of caustic/acidic liquid.",
+      "segregationAction": "Store in separate cabinets. Neutralization must be carried out only in controlled jacketed batch reactors with chilled diluent.",
+      "emergencyPrecautions": "Wear full acid-suit with face shield. Flood eye wash immediately if exposed.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / OSHA 1910.1200",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
-      "group1": "acyl_halides",
-      "group2": "alcohols",
+      "group1": "acids_inorganic",
+      "group2": "caustics_bases",
       "status": "INCOMPATIBLE",
       "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Waste-Stream Incompatibility",
-      "hazardCode": "H, T",
-      "hazardTitle": "Rapid Exothermic Esterification & Anhydrous HCl Overpressurization",
-      "chemicalEquation": "R-COCl + R'-OH -> R-COOR' + HCl(g) ^ + Heat",
-      "description": "Spontaneous reaction between acyl halides and alcohols releases substantial heat and anhydrous HCl gas, causing extreme pressure buildup in closed waste drums.",
-      "segregationAction": "Segregate acyl halides completely from organic solvent/alcohol waste drums. Ensure waste drum has a pressure-relief safety cap.",
-      "emergencyPrecautions": "Vent drum slowly under dry fume hood if pressurized. Isolate in dedicated halogenated/acidic carboy.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / EPA RCRA Handling Guidelines",
+      "incompatibilityType": "Storage Incompatibility & Exothermic Splatter",
+      "hazardCode": "H, C",
+      "hazardTitle": "Violent Exothermic Neutralization & Boiling Corrosive Spray",
+      "chemicalEquation": "H2SO4 + 2 NaOH -> Na2SO4 + 2 H2O + Delta H (-114 kJ/mol)",
+      "description": "Mixing concentrated mineral acids (H2SO4 98%, HCl 35%, HNO3 68%) with concentrated caustic lye (NaOH 50%, Ca(OH)2) releases immense heat instantly, converting water into superheated steam that erupts boiling corrosive liquid.",
+      "segregationAction": "MANDATORY SEPARATION: Class 8A (Acids) and Class 8B (Bases) must NEVER share the same secondary containment bund or drainage trench.",
+      "emergencyPrecautions": "Never pour water or base into concentrated acid. Always add acid slowly to water with continuous mechanical cooling.",
+      "authoritativeSource": "OSHA 1910.1200 / NFPA 400 / NOAA CAMEO",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
-      "group1": "caustics_bases",
-      "group2": "acids_inorganic",
+      "group1": "acids_inorganic",
+      "group2": "oxidizers_strong",
       "status": "INCOMPATIBLE",
       "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Storage Incompatibility",
-      "hazardCode": "H",
-      "hazardTitle": "Violent Acid-Base Exotherm & Steam Eruption",
-      "chemicalEquation": "2 NaOH + H2SO4 -> Na2SO4 + 2 H2O + 114 kJ/mol",
-      "description": "Mixing strong mineral acids with caustics produces instantaneous thermal release capable of boiling liquid mixtures and generating corrosive aerosols.",
-      "segregationAction": "Store in separate, dedicated, corrosion-proof polypropylene bunded cabinets (Blue = Acids, Red/White = Bases). Do not co-mingle without automated cooling.",
-      "emergencyPrecautions": "Use separate secondary bunds. Never allow drainage trenches to cross between acid and base storage bays.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / NFPA 400 Hazardous Materials Code",
+      "incompatibilityType": "Lethal Toxic Gas Evolution (Chlorine Disaster)",
+      "hazardCode": "T, C",
+      "hazardTitle": "Rapid Evolution of Lethal Yellow-Green Chlorine Gas (Cl2)",
+      "chemicalEquation": "NaClO + 2 HCl -> NaCl + H2O + Cl2(g) ^",
+      "description": "Mixing industrial hypochlorite bleach (NaClO 12.5%) with hydrochloric acid instantly liberates dense clouds of suffocating Chlorine gas. Cl2 causes severe pulmonary edema, fluid accumulation in lungs, and chemical asphyxiation.",
+      "segregationAction": "Segregate bleach from all mineral acids with physical partition and dedicated spill collection trays.",
+      "emergencyPrecautions": "Evacuate crosswind and upwind. Wear Level A/B hazmat suit with SCBA.",
+      "authoritativeSource": "EPA Chemical Emergency Preparedness Advisory / NOAA CAMEO",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
-      "group1": "caustics_bases",
-      "group2": "halogenated_organic",
+      "group1": "oxidizers_strong",
+      "group2": "amines_aliphatic",
       "status": "INCOMPATIBLE",
       "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Waste-Stream Incompatibility",
+      "incompatibilityType": "Toxic Gas & Explosive Compound Formation",
       "hazardCode": "T, E",
-      "hazardTitle": "Base-Catalyzed Dehydrohalogenation & Carbene Decomposition",
-      "chemicalEquation": "CH2Cl2 + 2 NaOH -> HCHO + 2 NaCl + H2O + Toxic Decomposition Byproducts",
-      "description": "Caustics react with halogenated organics (Dichloromethane, Chloroform) via base-catalyzed dehydrohalogenation. Can produce toxic carbenes, phosgene gas traces, or spontaneous explosion under warm conditions.",
-      "segregationAction": "Never pour halogenated extraction solvents into caustic scrubbers or basic waste drums. Route DCM to Halogenated Solvent Drum.",
-      "emergencyPrecautions": "If inadvertent mixing occurs, vent vapors to scrubber and cool vessel externally.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / ECHA Hazard Dossier",
+      "hazardTitle": "Lethal Chloramine Gas Release & Nitrogen Trichloride Explosion",
+      "chemicalEquation": "NaClO + NH4OH -> NH2Cl(g) ^ + NaOH + H2O",
+      "description": "Mixing bleach with ammonia or aliphatic amines (Triethylamine) generates toxic Chloramine (NH2Cl) vapors and shock-sensitive explosive Nitrogen Trichloride (NCl3).",
+      "segregationAction": "Store ammonia and amine drums in separate storage zones away from bleach and peroxides.",
+      "emergencyPrecautions": "Ventilate area thoroughly with spark-proof exhaust fans.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / NIOSH Pocket Guide",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
-      "group1": "oxidizing_agents",
+      "group1": "isocyanates",
+      "group2": "water_aqueous",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Water-Reactive Gas Overpressurization",
+      "hazardCode": "H, P",
+      "hazardTitle": "Severe Drum Overpressurization & Catastrophic Vessel Rupture",
+      "chemicalEquation": "R-NCO + H2O -> R-NH2 + CO2(g) ^ + Heat (Polyurea)",
+      "description": "Isocyanates (TDI) react exothermically with water and atmospheric moisture, releasing high-pressure Carbon Dioxide gas. In sealed drums, this builds pressure rapidly causing catastrophic drum blowout.",
+      "segregationAction": "Maintain airtight dry nitrogen blankets on all isocyanate storage tanks. Ensure desiccant breathers on bulk tanks are checked weekly.",
+      "emergencyPrecautions": "Never seal a drum contaminated with water. Decontaminate with liquid surfactant/alcohol/ammonia neutralizer solution.",
+      "authoritativeSource": "International Isocyanate Institute Safety Manual / NOAA CAMEO",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "peroxides_organic",
       "group2": "flammables",
       "status": "INCOMPATIBLE",
       "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Storage Incompatibility",
-      "hazardCode": "H, F, E",
-      "hazardTitle": "Spontaneous Combustion, Flash Fire & Catastrophic Deflagration",
-      "chemicalEquation": "2 HNO3 + Organic Solvent -> Rapid Runaway Oxidation + NOx + Fire/Explosion",
-      "description": "Contact between strong oxidizers (Nitric acid, H2O2, Permanganate) and flammable solvents (Toluene, Acetone, Ethanol, Limonene) produces spontaneous ignition and runaway oxidation deflagration.",
-      "segregationAction": "Store oxidizers in dedicated oxidizer safety cabinets with at least 6 meters separation or fireproof partitions from flammable solvent stores. Never co-dispose into solvent drums.",
-      "emergencyPrecautions": "Ensure deluge foam or water mist fire suppression systems in solvent and oxidizer storage bays.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / NFPA 30 Flammable Liquids Code",
+      "incompatibilityType": "Thermal Explosion & Deflagration",
+      "hazardCode": "E, F",
+      "hazardTitle": "Spontaneous Detonation & Catastrophic Thermal Fire",
+      "chemicalEquation": "Organic Peroxide (BPO) + Solvent -> Rapid Free-Radical Deflagration",
+      "description": "Organic peroxides (Benzoyl peroxide) are strong oxidizers with low thermal stability. Mixing with flammable solvents causes accelerated free-radical decomposition and violent detonation.",
+      "segregationAction": "Store organic peroxides in dedicated isolated refrigerated bunker away from all flammable solvents.",
+      "emergencyPrecautions": "Maintain water wetting in benzoyl peroxide. Keep temperature strictly below Self-Accelerating Decomposition Temperature (SADT 55°C).",
+      "authoritativeSource": "NFPA 400 / NOAA CAMEO Chemicals",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
-      "group1": "oxidizing_agents",
-      "group2": "reducing_agents",
+      "group1": "halogenated_organic",
+      "group2": "caustics_bases",
       "status": "INCOMPATIBLE",
-      "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Process Incompatibility",
-      "hazardCode": "H, E, T",
-      "hazardTitle": "Violent Redox Deflagration / Hexavalent Chromium Formation Hazard",
-      "chemicalEquation": "3 H2O2 + 2 Cr(OH)SO4 + Base -> 2 CrO4(2-) (Carcinogenic Cr(VI)) + 4 H2O + SO4(2-)",
-      "description": "Redox reactions between oxidizers (H2O2, HNO3) and strong reducers (NaBH4, sulfites) are explosive. In tanneries, accidental contact between strong oxidizers and Basic Chromium Sulfate oxidizes non-carcinogenic Cr(III) into highly toxic, carcinogenic, and mutagenic Hexavalent Chromium Cr(VI).",
-      "segregationAction": "Strict physical segregation of chromium tanning salts and sulfide liquors from peroxide bleach and nitric acid.",
-      "emergencyPrecautions": "Test wastewater immediately for Cr(VI) if cross-contamination is suspected. Add ferrous sulfate / sodium metabisulfite to reduce back to Cr(III).",
-      "authoritativeSource": "NOAA CAMEO Chemicals / EU REACH Annex XVII Restriction on Cr(VI)",
-      "confidence": "Verified Empirical (Authoritative)"
-    },
-    {
-      "group1": "water_reactive",
-      "group2": "water_aqueous",
-      "status": "INCOMPATIBLE",
-      "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Storage Incompatibility",
-      "hazardCode": "H, F, E",
-      "hazardTitle": "Explosive Hydrogen (H2) Gas Release & Violent Thermal Eruption",
-      "chemicalEquation": "NaBH4 + 2 H2O -> NaBO2 + 4 H2(g) ^ + Heat",
-      "description": "Water-reactive substances (Sodium borohydride, hydrides, acyl halides) react with moisture or water, evolving large volumes of flammable Hydrogen (H2) or toxic gases with extreme heat that ignites the evolved gas.",
-      "segregationAction": "Store in airtight, hermetically sealed metal drums under dry inert gas. Keep in elevated, moisture-free storage rooms above flood levels.",
-      "emergencyPrecautions": "Class D dry powder fire extinguisher mandatory. NEVER use water, foam, or halogenated extinguishers.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / NFPA 400 Water-Reactive Materials",
-      "confidence": "Verified Empirical (Authoritative)"
-    },
-    {
-      "group1": "cytotoxics",
-      "group2": "water_aqueous",
-      "status": "CONDITIONAL",
       "severity": "CAUTION",
-      "incompatibilityType": "Waste-Stream Incompatibility",
-      "hazardCode": "T",
-      "hazardTitle": "Cytotoxic Environmental Contamination & Regulatory Sewer Violation",
-      "chemicalEquation": "Cytotoxic API + Municipal Drain -> High Aquatic Genotoxicity (EPA Violation)",
-      "description": "Aqueous dilution does NOT eliminate antineoplastic toxicity. Discharging cytotoxic drugs (Cisplatin, Methotrexate, Doxorubicin) into water/sewer violates Clean Water Act standards and damages sewage biomes.",
-      "segregationAction": "MANDATORY: USP <800> compliance requires routing all antineoplastic solutions into rigid Yellow Cytotoxic Biohazard Buckets for high-temperature incineration at 1100°C. Never pour down sinks.",
-      "emergencyPrecautions": "Cytotoxic spill kit with absorbent pads, neutralizer, and double biohazard disposal bags required.",
-      "authoritativeSource": "USP <800> Hazardous Drugs / EPA RCRA Subpart P",
+      "incompatibilityType": "Dehydrohalogenation & Thermal Runaway",
+      "hazardCode": "H, E",
+      "hazardTitle": "Exothermic Dehydrohalogenation & Spontaneous Ignition",
+      "chemicalEquation": "CH2Cl2 + NaOH -> Hydrolysis & Exotherm",
+      "description": "Halogenated solvents (Dichloromethane, Chloroform) react exothermically with concentrated caustics or strong bases, forming explosive chloroacetylenes or hazardous phosgene traces.",
+      "segregationAction": "Store in dedicated Halogenated Solvent bay away from caustic soda drums.",
+      "emergencyPrecautions": "Never use caustic scrubbers directly on concentrated chlorinated solvent vapors without dilution.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / EPA Solvents Guide",
       "confidence": "Verified Empirical (Authoritative)"
     },
     {
-      "group1": "cyanides",
-      "group2": "acids_inorganic",
+      "group1": "quaternary_ammonium",
+      "group2": "surfactants_anionic",
       "status": "INCOMPATIBLE",
-      "severity": "DANGER",
-      "incompatibilityType": "Chemical Reactivity & Storage Incompatibility",
-      "hazardCode": "T",
-      "hazardTitle": "FATAL: Rapid Liberation of Hydrogen Cyanide (HCN) Gas",
-      "chemicalEquation": "NaCN + HCl -> NaCl + HCN(g) ^",
-      "description": "Acidification of cyanides immediately releases volatile, lethal Hydrogen Cyanide gas, which inhibits cellular cytochrome c oxidase and causes fatal hypoxia within minutes.",
-      "segregationAction": "CRITICAL: Cyanide solutions must be maintained at pH > 11 at all times. Store in locked toxic poison cabinet. Segregate rigorously from all acids.",
-      "emergencyPrecautions": "Administer Cyanokit (hydroxocobalamin) immediately upon exposure. Mandatory HCN air monitors.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / CDC NIOSH Emergency Response Card",
-      "confidence": "Verified Empirical (Authoritative)"
-    },
-    {
-      "group1": "alcohols",
-      "group2": "flammables",
-      "status": "COMPATIBLE",
-      "severity": "SAFE",
-      "incompatibilityType": "Storage Compatibility",
-      "hazardCode": "F",
-      "hazardTitle": "Miscible Flammable Solvents (Co-Storage Approved)",
-      "chemicalEquation": "Ethanol + Organic Solvent -> Stable Organic Solution (No Chemical Reaction)",
-      "description": "Alcohols and non-halogenated organic solvents are mutually miscible and do not exhibit dangerous chemical reactivity, but share high vapor pressure and flammability.",
-      "segregationAction": "Co-storage permitted in Non-Halogenated Organic Solvent carboy/drum. Must be grounded and bonded during transfer to eliminate static sparks.",
-      "emergencyPrecautions": "Ensure grounding clamps are attached prior to pouring.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / NFPA 30 Guidelines",
-      "confidence": "Verified Empirical (Authoritative)"
-    },
-    {
-      "group1": "water_aqueous",
-      "group2": "flammables",
-      "status": "COMPATIBLE",
-      "severity": "SAFE",
-      "incompatibilityType": "Storage Compatibility",
-      "hazardCode": "None",
-      "hazardTitle": "Compatible Aqueous-Solvent Dilution",
-      "chemicalEquation": "Water + Water-Miscible Solvents -> Stable Aqueous Blend",
-      "description": "Water reduces flashpoint hazards of water-miscible solvents (Ethanol, Isopropanol) without dangerous reactivity.",
-      "segregationAction": "Can be collected in solvent recovery drums if solvent concentration > 20%, or directed to biological pre-treatment if biodegradable.",
-      "emergencyPrecautions": "Check flash point if distilling.",
-      "authoritativeSource": "NOAA CAMEO Chemicals / EPA Effluent Guidelines",
+      "severity": "CAUTION",
+      "incompatibilityType": "Process & Formulation Incompatibility",
+      "hazardCode": "P",
+      "hazardTitle": "Complex Coacervation, Phase Inversion & Insoluble Sludge Formation",
+      "chemicalEquation": "Cationic (CTAC) + Anionic (SLES) -> Insoluble Coacervate Salt Precipitate",
+      "description": "Cationic surfactants react with anionic surfactants to form thick insoluble curds, plugging process transfer pumps, heat exchangers, and pipe manifolds.",
+      "segregationAction": "Physically isolate cationic and anionic bulk storage drums to avoid mixing during raw material charging.",
+      "emergencyPrecautions": "Flush fouled lines with hot isopropanol or non-ionic surfactant solution.",
+      "authoritativeSource": "Cosmetics Formulation Guidelines / NOAA CAMEO",
       "confidence": "Verified Empirical (Authoritative)"
     }
   ]
