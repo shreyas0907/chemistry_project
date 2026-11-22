@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CHEM-SHIELD | Master Industrial Safety & Digital Twin Dossier</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page) " / " counter(pages);
+      }
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      line-height: 1.5;
+      font-size: 10pt;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      color: #091e2b;
+      font-weight: 800;
+      margin-top: 0;
+      page-break-after: avoid;
+    }
+
+    h1 { font-size: 20pt; letter-spacing: -0.5px; }
+    h2 { font-size: 13pt; border-bottom: 2px solid #0891b2; padding-bottom: 4px; margin-top: 18pt; margin-bottom: 8pt; color: #0e7490; }
+    h3 { font-size: 11pt; margin-top: 12pt; margin-bottom: 4pt; color: #1e293b; }
+
+    p { margin: 0 0 6pt 0; text-align: justify; }
+
+    .header-banner {
+      background: linear-gradient(135deg, #081a24 0%, #0e3b4d 100%);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 16pt;
+    }
+
+    .header-banner h1 {
+      color: #ffffff;
+      margin: 0 0 4pt 0;
+      font-size: 22pt;
+    }
+
+    .badge-sub {
+      display: inline-block;
+      background: #06b6d4;
+      color: #081a24;
+      font-weight: 800;
+      font-size: 8pt;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6pt;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 8pt;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 8px;
+    }
+
+    .meta-item strong { display: block; color: #67e8f9; }
+
+    .callout {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
+      padding: 8pt 10pt;
+      border-radius: 4px;
+      margin: 8pt 0;
+      font-size: 9pt;
+    }
+
+    .callout-alert {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 8pt 10pt;
+      border-radius: 4px;
+      margin: 8pt 0;
+      font-size: 9pt;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8pt 0;
+      font-size: 8.5pt;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 5pt 7pt;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 7.5pt;
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    .pill-red { background: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
+    .pill-green { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .pill-amber { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .pill-cyan { background: #cffafe; color: #155e75; border: 1px solid #67e8f9; }
+
+    .module-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8pt 10pt;
+      margin-bottom: 8pt;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+
+    .module-title {
+      font-size: 10pt;
+      font-weight: 800;
+      color: #0e7490;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3pt;
+    }
+
+    .code-block {
+      font-family: "JetBrains Mono", Consolas, Menlo, monospace;
+      font-size: 8pt;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 4pt 6pt;
+      border-radius: 4px;
+      color: #0369a1;
+      display: block;
+      margin: 4pt 0;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .footer-note {
+      font-size: 8pt;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6pt;
+      margin-top: 14pt;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER BANNER -->
+  <div class="header-banner">
+    <div class="badge-sub">Enterprise Safety Specification</div>
+    <h1>CHEM-SHIELD</h1>
+    <div style="font-size: 12pt; color: #a5f3fc; font-weight: 600; margin-bottom: 8px;">
+      Intelligent Chemical Compatibility, 3D Digital Twin &amp; Industrial Safety Platform
+    </div>
+    <p style="color: #e0f2fe; font-size: 9pt; margin: 0; line-height: 1.4;">
+      Comprehensive safety audit documentation, 3D simulation architecture, NOAA CAMEO reactivity matrix, NFPA 400 warehouse segregation, HAZWOPER disaster emergency decision trees, and 3-stream industrial wastewater treatment kinetics.
+    </p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <strong>Live Production URL</strong>
+        https://chem-shield-platform.netlify.app
+      </div>
+      <div class="meta-item">
+        <strong>GitHub Repository</strong>
+        github.com/shreyas0907/chemistry_project
+      </div>
+      <div class="meta-item">
+        <strong>Formulary Scope</strong>
+        55+ Industrial Chemical Substances
+      </div>
+      <div class="meta-item">
+        <strong>Standards Compliance</strong>
+        OSHA 1910.1200 / NFPA 400 / EPA RMP
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: EXECUTIVE SUMMARY -->
+  <h2>1. Executive Summary &amp; Industrial Problem Definition</h2>
+  <p>
+    Accidental chemical mixing, unsegregated warehouse storage, and improper effluent routing in chemical processing facilities trigger catastrophic industrial disasters—including the evolution of lethal gases (such as Hydrogen Sulfide, Chlorine, and Nitrogen Dioxide), thermal runaway explosions in reactors, solvent flash fires, and toxic wastewater contamination.
+  </p>
+  <p>
+    <strong>CHEM-SHIELD</strong> provides a scientifically validated digital twin and decision-support engine. It bridges raw chemical safety data (PubChem, Safety Data Sheets, NOAA CAMEO, NIOSH) with practical industrial operations across four target manufacturing sectors:
+  </p>
+  <ul>
+    <li><strong>Leather Tanning &amp; Processing:</strong> Segregation of toxic sulfide beamhouse floats ($Na_2S, NaHS$) from acidic pickling floats ($H_2SO_4, HCOOH$) to eliminate fatal $H_2S$ gas evolution; trivalent chromium ($Cr(OH)SO_4$) precipitation to prevent environmental discharge.</li>
+    <li><strong>Pharmaceutical API Manufacturing:</strong> Segregation of halogenated organic solvents ($DCM$), flammable extraction reagents ($IPA, THF$), aggressive acyl halides ($SOCl_2$), and cytotoxic drugs ($Cisplatin, Methotrexate$).</li>
+    <li><strong>Cosmetics &amp; Personal Care:</strong> Safe bulk storage of high-strength oxidizers ($50\% H_2O_2$), concentrated organic and inorganic acids, active surfactants ($SLES, CAPB$), and preservatives.</li>
+    <li><strong>General Chemical Processing:</strong> Acid-base neutralization management, secondary containment berming, and bulk tank farm SCADA monitoring.</li>
+  </ul>
+
+  <!-- SECTION 2: 9 CORE SYSTEM MODULES -->
+  <h2>2. Architectural Overview of the 9 Core Platform Modules</h2>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 1: Command Center (SCADA Dashboard)</span>
+      <span class="pill pill-cyan">LayoutDashboard</span>
+    </div>
+    <p>Real-time supervisory control room displaying active inventory metrics (55 formulary substances), verified CAMEO incompatibility counts (207 high-risk pairs), storage bay audit flags, high-risk carcinogen/PBT inventory, and waste stream routing. Includes live interactive Recharts bar charts and pie charts segmented by sector.</p>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 2: 3D Industrial Complex (Three.js WebGL Digital Twin)</span>
+      <span class="pill pill-green">WebGL Engine</span>
+    </div>
+    <p>A full 3D interactive virtual chemical facility rendered in Three.js featuring:</p>
+    <ul>
+      <li><strong>Bulk Tank Farm:</strong> 4 heavy industrial tanks ($H_2SO_4$, $NaOH$, $H_2O_2$, and $DCM$) with liquid level sight-tubes, floating hazard rings, and breather vents.</li>
+      <li><strong>Segregated Warehouse Racks:</strong> Steel pallet racks stacked with 200L drums color-coded to GHS classes.</li>
+      <li><strong>Process Reactor R-301:</strong> 5,000L jacketed Hastelloy reactor with motorized agitator, condenser column, and rupture disc piping.</li>
+      <li><strong>ETP Treatment Basins:</strong> Diffused aeration basins with surface foam animation and clarifier impellers.</li>
+      <li><strong>Raycasting &amp; SCADA Telemetry Drawer:</strong> Clickable assets slide open real-time telemetry (temp, pressure, fill %, GHS warnings, and CAMEO group incompatibilities).</li>
+      <li><strong>5 Camera Presets:</strong> Overview, Warehouse, Reactor, ETP Plant, Emergency Station.</li>
+    </ul>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 3: Chemical Laboratory (Master Formulary)</span>
+      <span class="pill pill-cyan">PubChem PUG REST</span>
+    </div>
+    <p>Full searchable library of 55+ industrial chemicals with instant search by chemical name, CAS Registry Number, or molecular formula. Direct live integration with NIH PubChem PUG REST API queries 2D/3D structures, molecular properties, and GHS hazard statements on demand.</p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 4: Chemical Compatibility Analyzer Engine</span>
+      <span class="pill pill-amber">CAMEO Reactivity Matrix</span>
+    </div>
+    <p>Rules-based deterministic compatibility engine using the authoritative NOAA CAMEO 26-group reactivity matrix. Evaluates pairwise combinations and enforces the <strong>Precautionary Principle</strong>: if empirical reactivity data is missing, the pair is flagged as <span class="pill pill-amber">UNKNOWN / INSUFFICIENT DATA</span> (never assumed safe). Displays verified chemical equations and emergency actions.</p>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 5: 3D Chemical Warehouse Segregation Planner</span>
+      <span class="pill pill-green">NFPA 400 &amp; TRGS 510</span>
+    </div>
+    <p>Interactive warehouse layout simulator with 6 isolated containment bays: Flammables (`BAY-A`), Inorganic Acids (`BAY-B`), Bases (`BAY-C`), Oxidizers (`BAY-D`), Toxics (`BAY-E`), and Sulfides (`BAY-F`). Computes dynamic Warehouse Safety Score (0–100%), simulates dangerous co-storage, and features an <strong>"Auto-Segregate (NFPA 400)"</strong> optimizer that eliminates all adjacent cross-reactivity.</p>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 6: Industrial Emergency Response Trainer</span>
+      <span class="pill pill-red">OSHA 1910.120 HAZWOPER</span>
+    </div>
+    <p>Interactive incident commander trainer with 6 disaster scenarios ($H_2S$ Gas Evolution, Solvent Flash Fire &amp; BLEVE, Reactor Exothermic Runaway, Nitric Acid Tank Breach, Chromium Spill, Cytotoxic API Breach). Features 4-stage decision trees, live simulation clock, OSHA scoring algorithm (+25 / -20 pts), and exportable incident audit dossiers.</p>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 7: 3-Stream Wastewater Treatment (ETP) Simulator</span>
+      <span class="pill pill-cyan">Kinetic Modeling</span>
+    </div>
+    <p>Models the physics and chemistry of industrial wastewater treatment:</p>
+    <ul>
+      <li><strong>Stream A (Sulfide Beamhouse Float):</strong> Catalytic oxidation ($2S^{2-} + 2O_2 + H_2O \xrightarrow{MnSO_4} S_2O_3^{2-} + 2OH^-$) with aeration sliders and catalyst dosage.</li>
+      <li><strong>Stream B (Chromium Tanning Float):</strong> Alkali precipitation with $MgO$ or $Ca(OH)_2$ at pH 8.8 ($Cr^{3+} + 3OH^- \to Cr(OH)_3 \downarrow$).</li>
+      <li><strong>Effluent Compliance Radar:</strong> Evaluates simulated effluent against EPA/CPCB limits ($S^{2-} \le 2.0\text{ ppm}$, $Cr \le 2.0\text{ ppm}$, $COD \le 250\text{ ppm}$, $pH\ 6.5–8.5$).</li>
+    </ul>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 8: AI Chemical Risk Intelligence</span>
+      <span class="pill pill-cyan">Deterministic + AI</span>
+    </div>
+    <p>Calculates 4 traceable risk indices (0–10): Fire &amp; Flash Index, Toxic Inhalation/IDLH Index, Corrosivity/Exotherm Index, and Aquatic Ecotoxicity Index based on chemical identity, storage environment, temperature ($10–55^\circ\text{C}$), and ventilation mode. Generates an interactive hazard heatmap and mandatory engineering safeguards.</p>
+  </div>
+
+  <div class="module-card">
+    <div class="module-title">
+      <span>Module 9: Safety Reports &amp; Compliance Analytics</span>
+      <span class="pill pill-green">Audit Dossiers</span>
+    </div>
+    <p>Configures and generates downloadable compliance dossiers in PDF, JSON, and CSV formats covering compatibility matrices, segregation plans, emergency drill scores, and ETP effluent certificates.</p>
+  </div>
+
+  <!-- SECTION 3: KEY CHEMICAL INVENTORY TABLE -->
+  <h2>3. Representative Industrial Substances in Inventory</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Substance Name</th>
+        <th>Formula</th>
+        <th>CAS RN</th>
+        <th>Sector</th>
+        <th>Storage Bay</th>
+        <th>GHS / NFPA Classification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sulfuric Acid (98%)</strong></td>
+        <td>H₂SO₄</td>
+        <td>7664-93-9</td>
+        <td>Leather / General</td>
+        <td>Bay B (Acids)</td>
+        <td><span class="pill pill-red">Class 8 Corrosive</span> Skin 1A, Eye 1</td>
+      </tr>
+      <tr>
+        <td><strong>Sodium Sulfide (60% Flakes)</strong></td>
+        <td>Na₂S</td>
+        <td>1313-82-2</td>
+        <td>Leather Tanning</td>
+        <td>Bay F (Sulfides)</td>
+        <td><span class="pill pill-red">Class 4.2 / 8</span> Evolves Toxic H₂S with Acid</td>
+      </tr>
+      <tr>
+        <td><strong>Chromium(III) Basic Sulfate</strong></td>
+        <td>Cr(OH)SO₄</td>
+        <td>39380-78-4</td>
+        <td>Leather Tanning</td>
+        <td>Bay E (Toxics)</td>
+        <td><span class="pill pill-amber">Class 9 Ecotoxic</span> EPA Strict &lt; 2.0 ppm</td>
+      </tr>
+      <tr>
+        <td><strong>Dichloromethane (DCM)</strong></td>
+        <td>CH₂Cl₂</td>
+        <td>75-09-2</td>
+        <td>Pharmaceuticals</td>
+        <td>Bay A (Solvents)</td>
+        <td><span class="pill pill-amber">Class 6.1 Toxic</span> Carc. Cat 2, CNS Depressant</td>
+      </tr>
+      <tr>
+        <td><strong>Isopropanol (IPA 99.8%)</strong></td>
+        <td>C₃H₇OH</td>
+        <td>67-63-0</td>
+        <td>Pharma / General</td>
+        <td>Bay A (Flammables)</td>
+        <td><span class="pill pill-red">Class 3 Flammable</span> Flash Point 12°C</td>
+      </tr>
+      <tr>
+        <td><strong>Hydrogen Peroxide (50%)</strong></td>
+        <td>H₂O₂</td>
+        <td>7722-84-1</td>
+        <td>Cosmetics / General</td>
+        <td>Bay D (Oxidizers)</td>
+        <td><span class="pill pill-red">Class 5.1 Oxidizer</span> Oxygen Gas Liberator</td>
+      </tr>
+      <tr>
+        <td><strong>Sodium Hydroxide (50% Lye)</strong></td>
+        <td>NaOH (aq)</td>
+        <td>1310-73-2</td>
+        <td>All Sectors</td>
+        <td>Bay C (Alkalis)</td>
+        <td><span class="pill pill-red">Class 8 Base</span> Violent Neutralization Exotherm</td>
+      </tr>
+      <tr>
+        <td><strong>Sodium Borohydride</strong></td>
+        <td>NaBH₄</td>
+        <td>16940-66-2</td>
+        <td>Pharmaceuticals</td>
+        <td>Bay F (Hydrides)</td>
+        <td><span class="pill pill-red">Class 4.3 Water-Reactive</span> Evolves H₂ Gas</td>
+      </tr>
+      <tr>
+        <td><strong>Sodium Hypochlorite (12.5%)</strong></td>
+        <td>NaClO</td>
+        <td>7681-52-9</td>
+        <td>General Chemical</td>
+        <td>Bay D (Oxidizers)</td>
+        <td><span class="pill pill-amber">Class 8 Corrosive</span> Evolves Cl₂ Gas with Acid</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 4: SCIENTIFIC REACTION HAZARD MATRIX -->
+  <h2>4. Core Scientific Incompatibility Matrix (CAMEO Verification)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Reactant A</th>
+        <th>Reactant B</th>
+        <th>Status</th>
+        <th>Hazard Mechanism &amp; Chemical Reaction</th>
+        <th>Mandatory Precaution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sodium Sulfide</strong><br>(Na₂S)</td>
+        <td><strong>Sulfuric Acid</strong><br>(H₂SO₄)</td>
+        <td><span class="pill pill-red">CRITICAL RED</span></td>
+        <td>
+          <strong>Fatal H₂S Gas Evolution &amp; Exotherm</strong><br>
+          <span class="code-block">Na₂S + H₂SO₄ → H₂S (g) ↑ + Na₂SO₄ (ΔH = -88.4 kJ/mol)</span>
+          Causes rapid olfactory fatigue and fatal respiratory arrest above 100 ppm.
+        </td>
+        <td>Separate drainage lines. Trench pH must remain &gt; 9.5.</td>
+      </tr>
+      <tr>
+        <td><strong>Isopropanol</strong><br>(Solvent)</td>
+        <td><strong>Hydrogen Peroxide (50%)</strong><br>(Oxidizer)</td>
+        <td><span class="pill pill-red">CRITICAL RED</span></td>
+        <td>
+          <strong>Vapor Explosion &amp; Flash Fire</strong><br>
+          <span class="code-block">2 C₃H₇OH + 9 H₂O₂ → 6 CO₂ + 14 H₂O (Highly Exothermic)</span>
+          Oxygen release lowers ignition threshold, causing explosive combustion.
+        </td>
+        <td>Store in isolated firewalled bays. Minimum 6m physical air gap.</td>
+      </tr>
+      <tr>
+        <td><strong>Sulfuric Acid (98%)</strong><br>(Strong Acid)</td>
+        <td><strong>Sodium Hydroxide (50%)</strong><br>(Strong Base)</td>
+        <td><span class="pill pill-red">CRITICAL RED</span></td>
+        <td>
+          <strong>Violent Neutralization &amp; Geyser Ejection</strong><br>
+          <span class="code-block">H₂SO₄ + 2 NaOH → Na₂SO₄ + 2 H₂O (ΔH = -133.5 kJ/mol)</span>
+          Instant localized boiling ejects superheated corrosive caustic/acid mist.
+        </td>
+        <td>Controlled dosed addition with chilled cooling jacket only.</td>
+      </tr>
+      <tr>
+        <td><strong>Sodium Hypochlorite</strong><br>(Bleach)</td>
+        <td><strong>Hydrochloric Acid</strong><br>(HCl 35%)</td>
+        <td><span class="pill pill-red">CRITICAL RED</span></td>
+        <td>
+          <strong>Toxic Chlorine Gas Evolution</strong><br>
+          <span class="code-block">NaClO + 2 HCl → Cl₂ (g) ↑ + NaCl + H₂O</span>
+          Releases dense green choking Chlorine gas (NIOSH IDLH = 10 ppm).
+        </td>
+        <td>Strictly separate storage sumps and acid delivery piping.</td>
+      </tr>
+      <tr>
+        <td><strong>Hydrogen Peroxide</strong><br>(Oxidizer)</td>
+        <td><strong>Chromium(III) Sulfate</strong><br>(Tannery Float)</td>
+        <td><span class="pill pill-amber">CAUTION AMBER</span></td>
+        <td>
+          <strong>Hexavalent Chromium Cr(VI) Formation Risk</strong><br>
+          <span class="code-block">2 Cr³⁺ + 3 H₂O₂ + 10 OH⁻ → 2 CrO₄²⁻ + 8 H₂O</span>
+          Oxidizes benign trivalent chromium into carcinogenic hexavalent chromate.
+        </td>
+        <td>Do not co-mingle wastewater streams without reduction.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 5: REGULATORY COMPLIANCE REFERENCES -->
+  <h2>5. Regulatory Compliance &amp; Standards Traceability</h2>
+  <div class="callout">
+    <strong>Authoritative Standards Alignment:</strong> All chemical compatibility evaluations, storage segregation rules, and emergency response guidelines embedded within CHEM-SHIELD conform strictly to the following regulatory frameworks:
+  </div>
+  <ul>
+    <li><strong>OSHA 29 CFR 1910.1200:</strong> Hazard Communication Standard (GHS Rev 8 classification &amp; SDS authoring).</li>
+    <li><strong>OSHA 29 CFR 1910.120:</strong> Hazardous Waste Operations and Emergency Response (HAZWOPER incident command).</li>
+    <li><strong>NFPA 400:</strong> Hazardous Materials Code (2022 Edition - Storage Bay Isolation Distances &amp; Containment).</li>
+    <li><strong>NOAA CAMEO Chemicals:</strong> Computer-Aided Management of Emergency Operations Reactivity Worksheet v2.8.</li>
+    <li><strong>EPA Risk Management Plan (RMP):</strong> Clean Air Act Section 112(r) for offsite atmospheric toxic gas release modeling.</li>
+    <li><strong>ECHA REACH Regulation (EC 1907/2006):</strong> Registration, Evaluation, Authorisation and Restriction of Chemicals.</li>
+    <li><strong>German AwSV:</strong> Ordinance on Facilities for Handling Substances Hazardous to Water (WGK 1, 2, 3 classifications).</li>
+  </ul>
+
+  <div class="footer-note">
+    <span>CHEM-SHIELD Industrial Safety Platform • Technical Dossier v4.0</span>
+    <span>https://chem-shield-platform.netlify.app</span>
+  </div>
+
+</body>
+</html>
