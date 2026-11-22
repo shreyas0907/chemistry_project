@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from './components/Navbar';
-import InventoryTable from './components/InventoryTable';
+import DashboardOverview from './components/DashboardOverview';
 import CompatibilityChecker from './components/CompatibilityChecker';
-import GreenSubstitutionRecommender from './components/GreenSubstitutionRecommender';
-import DashboardAnalytics from './components/DashboardAnalytics';
+import InventoryManager from './components/InventoryManager';
+import IndustryModules from './components/IndustryModules';
+import SegregationSystem from './components/SegregationSystem';
+import AccidentSimulator from './components/AccidentSimulator';
+import AiSafetyAssistant from './components/AiSafetyAssistant';
+import EnvironmentalModule from './components/EnvironmentalModule';
 import AddCompoundModal from './components/AddCompoundModal';
+import ContainerQrModal from './components/ContainerQrModal';
+import ReportGeneratorModal from './components/ReportGeneratorModal';
 import CompoundDetailModal from './components/CompoundDetailModal';
-import { STARTER_INVENTORY } from './data/starterInventory';
-import { analyzeReactivityMatrix } from './services/pharmaApi';
+import { INITIAL_INDUSTRIAL_INVENTORY } from './data/industryChemicals';
+import { evaluateMultiChemicalCompatibility, detectStorageBayViolations } from './services/chemicalSafetyEngine';
 
-const STORAGE_KEY = 'pharma_eco_shield_inventory_v1';
+const STORAGE_KEY = 'chem_shield_industrial_inventory_v3';
 
 export default function App() {
   const [inventory, setInventory] = useState(() => {
@@ -22,13 +28,18 @@ export default function App() {
         }
       }
     } catch (e) {
-      console.warn('Could not read local storage, using default starter inventory:', e);
+      console.warn('Could not read local storage, using initial industrial formulary:', e);
     }
-    return STARTER_INVENTORY;
+    return INITIAL_INDUSTRIAL_INVENTORY;
   });
 
-  const [activeTab, setActiveTab] = useState('inventory'); // 'inventory' | 'compatibility' | 'green' | 'analytics'
+  // Active view tab: 'dashboard' | 'compatibility' | 'inventory' | 'industries' | 'segregation' | 'simulator' | 'ai' | 'environmental'
+  const [activeTab, setActiveTab] = useState('dashboard');
+  
+  // Modals state
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [qrModalChemical, setQrModalChemical] = useState(null);
   const [detailCompound, setDetailCompound] = useState(null);
 
   // Sync to local storage
@@ -40,10 +51,15 @@ export default function App() {
     }
   }, [inventory]);
 
-  // Global Incompatibility count for top indicator
+  // Global Incompatibility count for navbar alert badge
   const globalIncompatibilities = useMemo(() => {
-    const res = analyzeReactivityMatrix(inventory);
-    return res.pairInteractions.filter(p => p.severity === 'DANGER');
+    const res = evaluateMultiChemicalCompatibility(inventory);
+    return res.pairAssessments.filter(p => p.status === 'RED');
+  }, [inventory]);
+
+  // Storage bay conflict violations count
+  const bayViolations = useMemo(() => {
+    return detectStorageBayViolations(inventory);
   }, [inventory]);
 
   // Handlers
@@ -51,118 +67,51 @@ export default function App() {
     setInventory(prev => [newCompound, ...prev]);
   };
 
+  const handleUpdateCompound = (id, updates) => {
+    setInventory(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
+  };
+
   const handleDeleteCompound = (id) => {
-    if (window.confirm('Are you sure you want to remove this compound from active formulary?')) {
+    if (window.confirm('Are you sure you want to remove this chemical substance from the facility inventory?')) {
       setInventory(prev => prev.filter(c => c.id !== id));
     }
   };
 
   const handleResetDefaults = () => {
-    if (window.confirm('Reset inventory back to the 6 initial validated pharmaceutical compounds? Custom additions will be overwritten.')) {
-      setInventory(STARTER_INVENTORY);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(STARTER_INVENTORY));
+    if (window.confirm('Reset inventory back to the verified industrial formulary (covering Leather Tanning, Pharma, Cosmetics, and General Chemical)? Custom additions will be replaced.')) {
+      setInventory(INITIAL_INDUSTRIAL_INVENTORY);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_INDUSTRIAL_INVENTORY));
     }
   };
 
-  // CSV Export (EPA RCRA & Biomedical Waste Standard format)
-  const handleExportCsv = () => {
-    const headers = [
-      "Compound Name",
-      "Chemical Formula",
-      "CAS Number",
-      "Molecular Weight (g/mol)",
-      "Pharma Role",
-      "Physical State",
-      "USP <800> Class",
-      "Storage Class",
-      "Storage Conditions",
-      "Green Rating",
-      "Waste Stream Category",
-      "Persistence (P)",
-      "Bioaccumulation (B)",
-      "Aquatic Toxicity (T)",
-      "Hazard Summary"
-    ];
-
-    const rows = inventory.map(c => [
-      `"${(c.name || '').replace(/"/g, '""')}"`,
-      `"${(c.formula || '').replace(/"/g, '""')}"`,
-      `"${(c.cas || '').replace(/"/g, '""')}"`,
-      c.molecularWeight || 0,
-      `"${(c.pharmaRole || '').replace(/"/g, '""')}"`,
-      `"${(c.physicalState || '').replace(/"/g, '""')}"`,
-      `"${(c.uspClassification || '').replace(/"/g, '""')}"`,
-      `"${(c.storageClass || '').replace(/"/g, '""')}"`,
-      `"${(c.storageConditions || '').replace(/"/g, '""')}"`,
-      `"${(c.greenChemistryRating || '').replace(/"/g, '""')}"`,
-      `"${(c.wasteStream || '').replace(/"/g, '""')}"`,
-      `"${(c.pbtScore?.persistence || '').replace(/"/g, '""')}"`,
-      `"${(c.pbtScore?.bioaccumulation || '').replace(/"/g, '""')}"`,
-      `"${(c.pbtScore?.toxicity || '').replace(/"/g, '""')}"`,
-      `"${(c.hazardSummary || '').replace(/"/g, '""')}"`
-    ]);
-
-    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `PharmaEcoShield_Waste_Manifest_${new Date().toISOString().slice(0, 10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  // JSON Export (Full Scientific Compliance Dossier)
-  const handleExportJson = () => {
-    const dossier = {
-      facilitySystem: "PharmaEcoShield Chemical Reactivity & Environmental Tracker",
-      theme: "Eco-Botanical Bento Dashboard",
-      exportTimestamp: new Date().toISOString(),
-      standardsCompliance: [
-        "USP <800> Hazardous Drugs in Healthcare Settings",
-        "EPA RCRA Subpart P (Pharmaceutical Hazardous Waste)",
-        "ICH Q3C Impurities: Guideline for Residual Solvents",
-        "NOAA CAMEO Chemicals Reactivity Compatibility Matrix"
-      ],
-      totalInventoryRecords: inventory.length,
-      inventory
-    };
-
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dossier, null, 2));
-    const downloadAnchor = document.createElement('a');
-    downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `PharmaEcoShield_Compliance_Dossier_${new Date().toISOString().slice(0, 10)}.json`);
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-    downloadAnchor.remove();
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-[#08120E] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#070e0b] text-slate-100 selection:bg-emerald-500 selection:text-black">
       
-      {/* Top Navigation */}
+      {/* Top Industrial Header & Navigation */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenAddModal={() => setIsAddModalOpen(true)}
+        onOpenReportModal={() => setIsReportModalOpen(true)}
         inventoryCount={inventory.length}
         incompatibleCount={globalIncompatibilities.length}
+        bayViolationCount={bayViolations.length}
       />
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         
-        {activeTab === 'inventory' && (
-          <InventoryTable
+        {/* Tab 1: Dashboard Command Center */}
+        {activeTab === 'dashboard' && (
+          <DashboardOverview
             inventory={inventory}
-            onOpenAddModal={() => setIsAddModalOpen(true)}
-            onSelectCompound={(comp) => setDetailCompound(comp)}
-            onDeleteCompound={handleDeleteCompound}
-            onResetDefaults={handleResetDefaults}
-            onNavigateToCompatibility={() => setActiveTab('compatibility')}
+            onNavigate={(tab) => setActiveTab(tab)}
+            onOpenReportModal={() => setIsReportModalOpen(true)}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
           />
         )}
 
+        {/* Tab 2: Chemical Compatibility Engine */}
         {activeTab === 'compatibility' && (
           <CompatibilityChecker
             inventory={inventory}
@@ -170,28 +119,78 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'green' && (
-          <GreenSubstitutionRecommender
+        {/* Tab 3: Smart Chemical Inventory & Storage Bays */}
+        {activeTab === 'inventory' && (
+          <InventoryManager
+            inventory={inventory}
+            onOpenAddModal={() => setIsAddModalOpen(true)}
+            onOpenQrModal={(chem) => setQrModalChemical(chem)}
+            onSelectCompound={(chem) => setDetailCompound(chem)}
+            onDeleteCompound={handleDeleteCompound}
+            onUpdateCompound={handleUpdateCompound}
+            onResetDefaults={handleResetDefaults}
+            onNavigateToCompatibility={() => setActiveTab('compatibility')}
+          />
+        )}
+
+        {/* Tab 4: Industry Specific Modules */}
+        {activeTab === 'industries' && (
+          <IndustryModules
+            inventory={inventory}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
+          />
+        )}
+
+        {/* Tab 5: Industrial Segregation & Bay Audit */}
+        {activeTab === 'segregation' && (
+          <SegregationSystem
+            inventory={inventory}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
+          />
+        )}
+
+        {/* Tab 6: Industrial Accident Simulator */}
+        {activeTab === 'simulator' && (
+          <AccidentSimulator />
+        )}
+
+        {/* Tab 7: AI Safety Assistant Copilot */}
+        {activeTab === 'ai' && (
+          <AiSafetyAssistant
+            inventory={inventory}
+          />
+        )}
+
+        {/* Tab 8: Environmental & Green Chemistry */}
+        {activeTab === 'environmental' && (
+          <EnvironmentalModule
             inventory={inventory}
             onAddCompound={handleAddCompound}
           />
         )}
 
-        {activeTab === 'analytics' && (
-          <DashboardAnalytics
-            inventory={inventory}
-            onExportCsv={handleExportCsv}
-            onExportJson={handleExportJson}
-          />
-        )}
-
       </main>
 
-      {/* Add Custom Compound Modal with Live PubChem/openFDA/EPA integration */}
+      {/* Add Custom Chemical Modal */}
       <AddCompoundModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onSave={handleAddCompound}
+      />
+
+      {/* Container QR Label & Live Bay Audit Modal */}
+      <ContainerQrModal
+        chemical={qrModalChemical}
+        isOpen={!!qrModalChemical}
+        onClose={() => setQrModalChemical(null)}
+        allInventory={inventory}
+      />
+
+      {/* Scientific & Regulatory Audit Report Generator Modal */}
+      <ReportGeneratorModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        inventory={inventory}
       />
 
       {/* Chemical Dossier Slide-Over Inspector */}
@@ -201,15 +200,23 @@ export default function App() {
         onClose={() => setDetailCompound(null)}
       />
 
-      {/* Footer */}
-      <footer className="border-t border-emerald-500/10 bg-[#08120E]/90 backdrop-blur-md py-4 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span className="text-slate-400">
-            PharmaEcoShield • Eco-Botanical Bento Dashboard for Hospital Pharmacy & Hazardous Drug Safety
-          </span>
-          <span className="font-mono text-botanical-lime text-[11px]">
-            NOAA CAMEO • PubChem PUG REST • openFDA • EPA CTX Estimator
-          </span>
+      {/* Industrial Footer */}
+      <footer className="border-t border-emerald-500/15 bg-[#050b08]/90 backdrop-blur-md py-5 text-center text-xs text-slate-500 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center space-x-2 text-slate-400">
+            <span className="font-bold text-white">CHEM-SHIELD</span>
+            <span>•</span>
+            <span>Intelligent Chemical Compatibility, Segregation & Industrial Safety Platform</span>
+          </div>
+          <div className="font-mono text-botanical-lime text-[11px] flex items-center space-x-2">
+            <span>NOAA CAMEO</span>
+            <span>•</span>
+            <span>PubChem PUG REST</span>
+            <span>•</span>
+            <span>EPA AwSV WGK</span>
+            <span>•</span>
+            <span>OSHA 1910.1200</span>
+          </div>
         </div>
       </footer>
 

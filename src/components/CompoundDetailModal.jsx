@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   X, FlaskConical, ExternalLink, ShieldCheck, 
   AlertTriangle, Leaf, Trash2, Box, Info, AlertOctagon, 
-  Sparkles, Layers, Droplet 
+  Sparkles, Layers, Droplet, MapPin, Building2
 } from 'lucide-react';
 import PbtPillBar from './PbtPillBar';
 import cameoRules from '../data/cameoRules.json';
@@ -47,7 +47,7 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
                   isYellow ? 'bg-botanical-amber/10 text-botanical-amber border-botanical-amber/30' :
                   'bg-botanical-coral/10 text-botanical-coral border-botanical-coral/30'
                 }`}>
-                  {compound.greenChemistryRating}
+                  {compound.greenChemistryRating || 'Unrated'}
                 </span>
               </div>
 
@@ -76,7 +76,7 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
         {/* Scrollable Content Body */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           
-          {/* Bento Block 1: Glowing Botanical 2D Molecular Structure */}
+          {/* Bento Block 1: Glowing Botanical 2D Molecular Structure & Identity */}
           <div className="bento-card p-5 relative overflow-hidden flex flex-col sm:flex-row items-center gap-5">
             {/* Molecular Structure with glowing filter */}
             <div className="w-44 h-44 rounded-xl bg-forest-950 p-2.5 border border-emerald-500/20 flex items-center justify-center relative overflow-hidden shadow-inner group">
@@ -94,26 +94,34 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
 
             {/* Quick Properties */}
             <div className="flex-1 space-y-3 w-full">
-              <div>
-                <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                  PubChem Live Chemical ID
-                </span>
-                <div className="flex items-center space-x-2 mt-0.5">
-                  <span className="font-mono text-sm font-bold text-botanical-sage">
-                    {compound.cid ? `CID #${compound.cid}` : 'Custom Formulation'}
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                    Industry Sector
                   </span>
-                  {compound.cid && (
-                    <a
-                      href={`https://pubchem.ncbi.nlm.nih.gov/compound/${compound.cid}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-botanical-emerald hover:text-botanical-lime transition"
-                      title="Open in PubChem"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+                  <span className="text-xs font-bold text-white flex items-center space-x-1 mt-0.5">
+                    <Building2 className="w-3.5 h-3.5 text-botanical-emerald" />
+                    <span>{compound.industry || 'General Chemical'}</span>
+                  </span>
                 </div>
+
+                {/* NFPA mini display */}
+                {compound.nfpa && (
+                  <div className="inline-grid grid-cols-2 gap-0.5 p-1 bg-forest-900 rounded border border-emerald-500/20 font-mono text-[9px] font-bold">
+                    <div className="w-4 h-4 bg-blue-600/60 text-blue-200 flex items-center justify-center" title="Health">
+                      {compound.nfpa.health ?? 0}
+                    </div>
+                    <div className="w-4 h-4 bg-red-600/60 text-red-200 flex items-center justify-center" title="Flammability">
+                      {compound.nfpa.flammability ?? 0}
+                    </div>
+                    <div className="w-4 h-4 bg-amber-600/60 text-amber-200 flex items-center justify-center" title="Instability">
+                      {compound.nfpa.instability ?? 0}
+                    </div>
+                    <div className="w-4 h-4 bg-slate-700/60 text-slate-300 flex items-center justify-center text-[7px]" title="Special">
+                      {compound.nfpa.special || '-'}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Segmented PBT Pill Bar */}
@@ -126,7 +134,7 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
 
               <div className="pt-2 border-t border-emerald-500/10 grid grid-cols-2 gap-2 text-xs">
                 <div>
-                  <span className="text-[10px] text-slate-400 block">Role</span>
+                  <span className="text-[10px] text-slate-400 block">Function / Role</span>
                   <span className="font-semibold text-white">{compound.pharmaRole}</span>
                 </div>
                 <div>
@@ -137,42 +145,39 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
             </div>
           </div>
 
-          {/* Bento Block 2: Regulatory & Storage Classification */}
+          {/* Bento Block 2: Storage Location, Bay & Regulatory Classification */}
           <div className="bento-card p-5 space-y-3">
             <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
               <ShieldCheck className="w-4 h-4 text-botanical-teal" />
-              <span>Hospital Pharmacy & USP &lt;800&gt; Regulatory Classification</span>
+              <span>Storage Bay, Segregation & Environmental Standards</span>
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-xl bg-forest-900/60 border border-emerald-500/10">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">
-                  USP &lt;800&gt; / NIOSH Class
+                  Assigned Storage Location
                 </span>
-                <span className={`font-bold ${
-                  compound.uspClassification?.includes('Antineoplastic') ? 'text-botanical-coral' :
-                  compound.uspClassification?.includes('Hazardous') ? 'text-botanical-amber' :
-                  'text-botanical-lime'
-                }`}>
-                  {compound.uspClassification || 'Non-Hazardous'}
+                <span className="font-bold text-white flex items-center space-x-1">
+                  <MapPin className="w-3.5 h-3.5 text-botanical-lime" />
+                  <span>{compound.storageLocation || 'General Chemical Store'}</span>
                 </span>
               </div>
 
               <div className="p-3 rounded-xl bg-forest-900/60 border border-emerald-500/10">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">
-                  Storage Class Code
+                  Storage Class & Quantity
                 </span>
                 <span className="font-mono font-bold text-botanical-cyan">
-                  {compound.storageClass || '11 (General)'}
+                  {compound.storageClass || '11 (General)'} • {compound.quantity || 0} {compound.unit || 'kg'}
                 </span>
               </div>
 
               <div className="p-3 rounded-xl bg-forest-900/60 border border-emerald-500/10">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">
-                  Climate Storage Conditions
+                  Water Hazard Class (AwSV WGK)
                 </span>
                 <span className="text-slate-200 font-medium">
-                  {compound.storageConditions}
+                  {compound.wgkClass || 'WGK 1 (Low hazard)'}
                 </span>
               </div>
 
@@ -181,17 +186,17 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
                   Disposal Waste Stream
                 </span>
                 <span className="font-semibold text-botanical-coral">
-                  {compound.wasteStream}
+                  {compound.wasteStream || 'General Chemical ETP'}
                 </span>
               </div>
 
-              {compound.smiles && (
+              {compound.handlingNotes && (
                 <div className="sm:col-span-2 p-3 rounded-xl bg-forest-900/60 border border-emerald-500/10">
                   <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-1">
-                    Canonical SMILES Notation
+                    Standard Handling & Segregation Precautions
                   </span>
-                  <p className="font-mono text-xs text-botanical-sage break-all select-all">
-                    {compound.smiles}
+                  <p className="text-xs text-slate-200 leading-relaxed">
+                    {compound.handlingNotes}
                   </p>
                 </div>
               )}
@@ -224,27 +229,27 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
             </div>
           </div>
 
-          {/* Bento Block 4: GHS Hazard Summary & openFDA Monograph */}
+          {/* Bento Block 4: GHS Hazard Summary */}
           <div className="bento-card p-5 space-y-3">
             <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
               <Info className="w-4 h-4 text-botanical-teal" />
-              <span>GHS Safety Warnings & openFDA Drug Monograph</span>
+              <span>GHS Safety Warnings & Critical Hazard Profile</span>
             </h3>
 
             <div className="space-y-3 text-xs leading-relaxed">
               <div className="p-3.5 rounded-xl bg-forest-900/60 border border-emerald-500/10">
                 <span className="font-bold text-botanical-coral block mb-1">
-                  Chemical Reactivity & Hazard Profile:
+                  Chemical Reactivity & Hazard Summary:
                 </span>
                 <p className="text-slate-300">
-                  {compound.hazardSummary || 'No acute reactivity hazards documented. Handle with standard laboratory PPE.'}
+                  {compound.hazardSummary || 'No acute reactivity hazards documented. Handle with standard industrial PPE.'}
                 </p>
               </div>
 
               {compound.fdaNotes && (
                 <div className="p-3.5 rounded-xl bg-forest-900/60 border border-emerald-500/10">
                   <span className="font-bold text-botanical-cyan block mb-1">
-                    openFDA Boxed Warning & Pharmaceutical Compounding Controls:
+                    Regulatory Monograph / Clinical Notes:
                   </span>
                   <p className="text-slate-300">
                     {compound.fdaNotes}
@@ -258,12 +263,12 @@ export default function CompoundDetailModal({ compound, isOpen, onClose }) {
 
         {/* Footer */}
         <div className="p-4 border-t border-emerald-500/15 bg-forest-900/80 backdrop-blur-md flex items-center justify-between text-xs text-slate-400">
-          <span>PharmaEcoShield • Chemical Dossier Inspector</span>
+          <span>CHEM-SHIELD • Industrial Chemical Safety Dossier</span>
           <button
             onClick={onClose}
             className="px-4 py-2 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-medium transition"
           >
-            Close Inspector
+            Close Dossier
           </button>
         </div>
 
