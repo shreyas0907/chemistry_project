@@ -1,6 +1,11 @@
 # CHEM-SHIELD 🛡️⚗️
 ### Intelligent Chemical Compatibility, Segregation & Industrial Safety Platform
 
+[![Live Production Site](https://img.shields.io/badge/Live%20Demo-chem--shield--platform.netlify.app-10B981?style=for-the-badge&logo=netlify)](https://chem-shield-platform.netlify.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/shreyas0907/chemistry_project)
+
+**Live Production Deployment:** [https://chem-shield-platform.netlify.app](https://chem-shield-platform.netlify.app)
+
 **CHEM-SHIELD** is a professional, modern, scientifically reliable, and fully functional industrial chemical safety platform designed to prevent catastrophic industrial accidents caused by accidental mixing, incompatible storage, unsafe handling, and improper wastewater disposal.
 
 The platform identifies incompatible chemical substances before they come into contact, evaluates their thermodynamic and toxicological hazards, recommends safe segregation distances, and provides scientifically authoritative safety information across four high-hazard processing industries.
