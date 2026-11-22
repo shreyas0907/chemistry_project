@@ -21,6 +21,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Editor / OS
+.netlify/
 .DS_Store
 .vscode/
 .idea/
