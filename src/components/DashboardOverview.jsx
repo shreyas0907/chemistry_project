@@ -1,12 +1,39 @@
 import React, { useMemo } from 'react';
 import { 
-  Building2, ShieldAlert, AlertTriangle, CheckCircle2, 
-  Layers, Flame, Trash2, Activity, ArrowRight, Zap, 
-  MapPin, Clock, FileText, Sparkles, Droplet 
+  Building2, 
+  ShieldAlert, 
+  AlertTriangle, 
+  CheckCircle2, 
+  Layers, 
+  Flame, 
+  Trash2, 
+  Activity, 
+  ArrowRight, 
+  Zap, 
+  MapPin, 
+  Clock, 
+  FileText, 
+  Sparkles, 
+  Droplet,
+  Box,
+  Siren,
+  Droplets,
+  Brain,
+  ChevronRight,
+  ShieldCheck,
+  Radio
 } from 'lucide-react';
 import { 
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
-  PieChart, Pie, Cell, Legend 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  Tooltip, 
+  ResponsiveContainer, 
+  PieChart, 
+  Pie, 
+  Cell, 
+  Legend 
 } from 'recharts';
 import { evaluateMultiChemicalCompatibility, detectStorageBayViolations } from '../services/chemicalSafetyEngine';
 
@@ -83,68 +110,168 @@ export default function DashboardOverview({
     }));
   }, [inventory]);
 
-  // Recent system activity
-  const recentActivities = [
-    { time: "10 mins ago", type: "BAY_AUDIT", text: `Storage Bay audit detected ${bayViolations.filter(v => v.severity === 'CRITICAL').length} critical co-storage conflicts across active warehouses.` },
-    { time: "25 mins ago", type: "COMPATIBILITY", text: `Multi-chemical analysis completed for ${totalChemicals} formulary substances: ${compatibilityStats.redCount} incompatible combinations flagged.` },
-    { time: "1 hour ago", type: "API_SYNC", text: "PubChem PUG REST & openFDA clinical records synchronized for active active APIs and solvents." },
-    { time: "3 hours ago", type: "SEGREGATION", text: "Sodium Sulfide to Sulfuric Acid minimum 6m distance mandate enforced in Leather Tanning Bay 4." }
-  ];
-
   return (
     <div className="space-y-6">
       
       {/* Top Industrial SaaS Hero Banner */}
-      <div className="p-6 rounded-2xl bg-[#0b1324] border border-emerald-500/20 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="p-6 rounded-2xl bg-gradient-to-r from-[#07131b] via-[#091822] to-[#0d222e] border border-cyan-500/25 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div>
             <div className="flex items-center space-x-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-950 text-emerald-400 border border-emerald-800">
-                INDUSTRIAL ENTERPRISE SAAS
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-950 text-cyan-400 border border-cyan-800">
+                INDUSTRIAL DIGITAL TWIN
               </span>
               <span className="text-xs text-slate-400 font-mono">
-                Real-Time Risk Decision Support
+                Real-Time Chemical Safety Command Center
               </span>
             </div>
-            <h1 className="text-2xl font-black text-white tracking-tight mt-1">
-              CHEM-SHIELD <span className="text-emerald-400">Command Center</span>
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1">
+              CHEM-SHIELD <span className="text-cyan-400">Control Room</span>
             </h1>
-            <p className="text-xs text-slate-300 max-w-2xl mt-1 leading-relaxed">
-              Intelligent Chemical Compatibility, Storage Segregation &amp; Industrial Waste Routing across Leather Tanning, Pharmaceuticals, Cosmetics, and General Processing Facilities.
+            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mt-1 leading-relaxed">
+              Intelligent Chemical Compatibility, 3D Warehouse Segregation, ETP Wastewater Modeling, and Industrial Disaster Response across Leather Tanning, Pharmaceuticals, Cosmetics, and Processing Industries.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
             <button
-              onClick={() => onNavigate('compatibility')}
-              className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl flex items-center space-x-2 shadow-lg shadow-emerald-950 transition hover:scale-105"
+              onClick={() => onNavigate('digital-twin')}
+              className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 text-xs font-bold rounded-xl flex items-center space-x-2 shadow-lg shadow-cyan-500/20 transition hover:scale-105"
             >
-              <Zap className="w-4 h-4" />
-              <span>Run Compatibility Check</span>
+              <Box className="w-4 h-4" />
+              <span>Launch 3D Digital Twin</span>
+            </button>
+            <button
+              onClick={() => onNavigate('emergency')}
+              className="px-4 py-2.5 bg-red-950/60 hover:bg-red-900/60 text-red-200 text-xs font-bold rounded-xl border border-red-500/40 flex items-center space-x-2 transition"
+            >
+              <Flame className="w-4 h-4 text-red-400" />
+              <span>Incident Drills</span>
             </button>
             <button
               onClick={onOpenReportModal}
-              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl border border-slate-700 flex items-center space-x-2 transition"
+              className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl border border-slate-800 flex items-center space-x-2 transition"
             >
-              <FileText className="w-4 h-4 text-emerald-400" />
-              <span>Generate Audit Report</span>
+              <FileText className="w-4 h-4 text-cyan-400" />
+              <span>Audit Dossier</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* KPI Metric Cards Grid */}
+      {/* 4 CORE 3D SIMULATION DIGITAL TWIN QUICK LAUNCHERS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        {/* Launcher 1: 3D Digital Twin */}
+        <div 
+          onClick={() => onNavigate('digital-twin')}
+          className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
+        >
+          <div className="flex items-center justify-between">
+            <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+              <Box className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+              Three.js WebGL
+            </span>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-100 text-sm group-hover:text-cyan-300 transition flex items-center justify-between">
+              <span>3D Industrial Complex</span>
+              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition" />
+            </h4>
+            <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
+              Virtual chemical manufacturing facility with clickable tanks, reactors, and live SCADA telemetry.
+            </p>
+          </div>
+        </div>
+
+        {/* Launcher 2: Warehouse Planner */}
+        <div 
+          onClick={() => onNavigate('warehouse-planner')}
+          className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
+        >
+          <div className="flex items-center justify-between">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+              <Building2 className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+              NFPA 400
+            </span>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-100 text-sm group-hover:text-emerald-300 transition flex items-center justify-between">
+              <span>Warehouse Segregation</span>
+              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
+            </h4>
+            <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
+              Pallet rack layout simulator, adjacent conflict auditor, and automated layout optimizer.
+            </p>
+          </div>
+        </div>
+
+        {/* Launcher 3: Emergency Drills */}
+        <div 
+          onClick={() => onNavigate('emergency')}
+          className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-red-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
+        >
+          <div className="flex items-center justify-between">
+            <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
+              <Siren className="w-5 h-5 animate-pulse" />
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800">
+              6 Scenarios
+            </span>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-100 text-sm group-hover:text-red-300 transition flex items-center justify-between">
+              <span>Emergency Response</span>
+              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-red-400 transition" />
+            </h4>
+            <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
+              Interactive OSHA 1910.120 disaster decision trainer with vapor dispersion and incident scoring.
+            </p>
+          </div>
+        </div>
+
+        {/* Launcher 4: ETP Simulator */}
+        <div 
+          onClick={() => onNavigate('etp')}
+          className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
+        >
+          <div className="flex items-center justify-between">
+            <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+              <Droplets className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+              EPA Standard
+            </span>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-100 text-sm group-hover:text-cyan-300 transition flex items-center justify-between">
+              <span>ETP Wastewater Twin</span>
+              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition" />
+            </h4>
+            <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
+              Catalytic sulfide oxidation, chromium hydroxide precipitation, and real-time kinetic curves.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      {/* KPI METRICS ROW */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* KPI 1: Total Registered Chemicals */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-[#091117] border border-slate-800 shadow-xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Total Chemical Inventory
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
+              Facility Formulary
             </span>
-            <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
               <Building2 className="w-4 h-4" />
             </div>
           </div>
@@ -154,15 +281,15 @@ export default function DashboardOverview({
           </div>
           <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px]">
             <span className="text-slate-400">Empirically Verified:</span>
-            <span className="text-emerald-400 font-bold font-mono">100% Verified</span>
+            <span className="text-emerald-400 font-bold font-mono">100% NOAA / PubChem</span>
           </div>
         </div>
 
         {/* KPI 2: Incompatible Pairwise Conflicts */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-[#091117] border border-slate-800 shadow-xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Incompatible Combinations
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
+              Incompatible Combos
             </span>
             <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${
               compatibilityStats.redCount > 0
@@ -185,9 +312,9 @@ export default function DashboardOverview({
         </div>
 
         {/* KPI 3: High-Risk Chemicals */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-[#091117] border border-slate-800 shadow-xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
               High-Risk Substances
             </span>
             <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
@@ -200,14 +327,14 @@ export default function DashboardOverview({
           </div>
           <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px]">
             <span className="text-slate-400">Green Replacements:</span>
-            <span className="text-emerald-400 font-bold font-mono">5 Available</span>
+            <span className="text-emerald-400 font-bold font-mono">Available</span>
           </div>
         </div>
 
         {/* KPI 4: Pending Safety Bay Alerts */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-[#091117] border border-slate-800 shadow-xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
               Storage Bay Conflicts
             </span>
             <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${
@@ -238,11 +365,11 @@ export default function DashboardOverview({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Chart 1: Industry-Wise Chemical & Risk Distribution */}
-        <div className="lg:col-span-2 p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-2 p-5 rounded-2xl bg-[#091117] border border-slate-800 shadow-xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-                <Building2 className="w-4 h-4 text-emerald-400" />
+                <Building2 className="w-4 h-4 text-cyan-400" />
                 <span>Industry-Wise Inventory &amp; High-Risk Substance Distribution</span>
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
@@ -258,134 +385,57 @@ export default function DashboardOverview({
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={industryDistributionData} margin={{ top: 15, right: 15, left: -20, bottom: 5 }}>
                 <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} allowDecimals={false} />
+                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#070d1a', borderColor: '#334155', borderRadius: '0.75rem', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: '#060c10', borderColor: '#1e293b', borderRadius: '0.75rem', fontSize: '11px' }}
                 />
-                <Bar dataKey="SafeModerate" name="Standard / Moderate" fill="#10b981" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="HighRisk" name="High Risk (Red PBT / Toxic)" fill="#f43f5e" radius={[4, 4, 0, 0]} />
+                <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
+                <Bar dataKey="SafeModerate" stackId="a" fill="#06b6d4" name="Standard Reagents" radius={[0, 0, 4, 4]} />
+                <Bar dataKey="HighRisk" stackId="a" fill="#ef4444" name="High-Risk Flagged" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
-
-          <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-xs text-slate-400">
-            <span className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span>Standard Handling</span>
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 ml-2" />
-              <span>High Risk / Toxic Priority</span>
-            </span>
-            <button
-              onClick={() => onNavigate('industries')}
-              className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center space-x-1"
-            >
-              <span>Explore Industry Directives</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
         </div>
 
-        {/* Chart 2: Industrial Waste Stream Segregation Allocation */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl flex flex-col justify-between">
+        {/* Chart 2: Waste Stream Segregation Breakdown */}
+        <div className="p-5 rounded-2xl bg-[#091117] border border-slate-800 shadow-xl flex flex-col justify-between">
           <div>
             <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-              <Trash2 className="w-4 h-4 text-cyan-400" />
-              <span>Waste Stream Allocation</span>
+              <Trash2 className="w-4 h-4 text-emerald-400" />
+              <span>Waste Segregation Sump Routing</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Compliant segregation into treatment streams
+              Active segregation by containment class
             </p>
           </div>
 
-          <div className="h-64 w-full my-3">
+          <div className="h-56 w-full my-2">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart layout="vertical" data={wasteStreamData} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
-                <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 10 }} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" tick={{ fill: '#e2e8f0', fontSize: 9 }} width={80} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#070d1a', borderColor: '#334155', borderRadius: '0.75rem', fontSize: '11px' }}
-                />
-                <Bar dataKey="count" fill="#06b6d4" radius={[0, 4, 4, 0]}>
+              <PieChart>
+                <Pie
+                  data={wasteStreamData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={75}
+                  paddingAngle={3}
+                  dataKey="count"
+                >
                   {wasteStreamData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={WASTE_COLORS[index % WASTE_COLORS.length]} />
                   ))}
-                </Bar>
-              </BarChart>
+                </Pie>
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#060c10', borderColor: '#1e293b', borderRadius: '0.75rem', fontSize: '11px' }}
+                />
+              </PieChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-400">
-            <span>Critical Rule: Sulfides &amp; Chromes must never mix in raw ETP pit.</span>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Bottom Section: Active Incompatibility Alerts & System Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        {/* Active Storage Bay Incompatibility Alerts */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl space-y-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-              <ShieldAlert className="w-4 h-4 text-red-400" />
-              <span>Critical Active Storage Bay Alarms</span>
-            </h3>
-            <button
-              onClick={() => onNavigate('segregation')}
-              className="text-xs text-emerald-400 hover:text-emerald-300 font-bold"
-            >
-              View All Bays
-            </button>
-          </div>
-
-          {bayViolations.length === 0 ? (
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-400 flex items-center space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>No storage bay violations detected. All chemicals safely segregated.</span>
-            </div>
-          ) : (
-            <div className="space-y-2.5">
-              {bayViolations.slice(0, 3).map((bv, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl bg-red-950/30 border border-red-500/40 text-xs space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-white flex items-center space-x-1">
-                      <MapPin className="w-3.5 h-3.5 text-red-400" />
-                      <span>{bv.location}</span>
-                    </span>
-                    <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase bg-red-600 text-white">
-                      {bv.severity}
-                    </span>
-                  </div>
-                  <p className="text-red-300 text-[11px] leading-relaxed">
-                    {bv.recommendation}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* System Activity & Audit Trail */}
-        <div className="p-5 rounded-2xl bg-[#0b1324] border border-slate-800 shadow-xl space-y-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-              <Activity className="w-4 h-4 text-cyan-400" />
-              <span>Recent Chemical Safety Activity &amp; Audit Trail</span>
-            </h3>
-            <span className="text-xs font-mono text-slate-400">Live Log</span>
-          </div>
-
-          <div className="space-y-2.5">
-            {recentActivities.map((act, aIdx) => (
-              <div key={aIdx} className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs flex items-start space-x-3">
-                <Clock className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <div className="flex-1 space-y-0.5">
-                  <p className="text-slate-300 leading-relaxed">{act.text}</p>
-                  <span className="text-[10px] text-slate-500 font-mono">{act.time}</span>
-                </div>
-              </div>
-            ))}
+          <div className="text-center">
+            <span className="text-[10px] font-mono text-slate-500">
+              Sulfide &amp; Acid sumps isolated by physical air gap
+            </span>
           </div>
         </div>
 
@@ -394,4 +444,3 @@ export default function DashboardOverview({
     </div>
   );
 }
-

@@ -383,6 +383,34 @@ export function evaluateMultiChemicalCompatibility(chemicals = []) {
 }
 
 /**
+ * Evaluates pairwise compatibility between two specific chemical substances
+ */
+export function evaluatePairCompatibility(chemA, chemB) {
+  if (!chemA || !chemB) {
+    return {
+      status: "UNKNOWN",
+      category: "UNKNOWN",
+      severity: "CAUTION",
+      hazardTitle: "Insufficient Empirical Reactivity Data",
+      description: "One or both substances are missing for evaluation.",
+      segregationAction: "Maintain physical separation until verified."
+    };
+  }
+  const res = evaluateMultiChemicalCompatibility([chemA, chemB]);
+  if (res && res.pairInteractions && res.pairInteractions.length > 0) {
+    return res.pairInteractions[0];
+  }
+  return {
+    status: res.overallCategory === "RED" ? "RED" : res.overallCategory === "AMBER" ? "AMBER" : "COMPATIBLE",
+    category: res.overallCategory,
+    severity: res.overallSeverity,
+    hazardTitle: res.overallBadgeText || "Standard Evaluation",
+    description: res.summary,
+    segregationAction: "Standard storage precautions apply."
+  };
+}
+
+/**
  * 3. Warehouse Bay Segregation & Conflict Detector
  * Scans inventory and flags any incompatible chemicals stored in the exact same location
  */
