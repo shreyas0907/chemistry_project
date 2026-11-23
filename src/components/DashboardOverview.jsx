@@ -21,7 +21,11 @@ import {
   Brain,
   ChevronRight,
   ShieldCheck,
-  Radio
+  Radio,
+  Camera,
+  Ruler,
+  Languages,
+  Printer
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -40,18 +44,21 @@ import { evaluateMultiChemicalCompatibility, detectStorageBayViolations } from '
 const INDUSTRY_COLORS = {
   "Leather Tanning": "#f59e0b",
   "Pharmaceuticals": "#8b5cf6",
-  "Cosmetics": "#10b981",
+  "Electroplating": "#ec4899",
+  "Agrochemicals": "#eab308",
+  "Cosmetics & Personal Care": "#10b981",
   "General Chemical": "#06b6d4"
 };
 
 const WASTE_COLORS = [
-  '#10b981', '#14b8a6', '#06b6d4', '#f59e0b', '#f43f5e', '#8b5cf6', '#64748b'
+  '#10b981', '#14b8a6', '#06b6d4', '#f59e0b', '#f43f5e', '#8b5cf6', '#64748b', '#ec4899'
 ];
 
 export default function DashboardOverview({ 
   inventory = [], 
   onNavigate, 
   onOpenReportModal, 
+  onOpenScannerModal,
   onSelectChemical 
 }) {
   // Real dynamic calculations
@@ -74,15 +81,17 @@ export default function DashboardOverview({
     const counts = {
       "Leather Tanning": { total: 0, highRisk: 0 },
       "Pharmaceuticals": { total: 0, highRisk: 0 },
-      "Cosmetics": { total: 0, highRisk: 0 },
+      "Electroplating": { total: 0, highRisk: 0 },
+      "Agrochemicals": { total: 0, highRisk: 0 },
       "General Chemical": { total: 0, highRisk: 0 }
     };
 
     inventory.forEach(c => {
-      const ind = c.industry || "General Chemical";
+      let ind = c.industry || "General Chemical";
+      if (ind === "Pharmaceutical") ind = "Pharmaceuticals";
       if (!counts[ind]) counts[ind] = { total: 0, highRisk: 0 };
       counts[ind].total += 1;
-      if (c.greenChemistryRating === 'Red' || c.storageClass?.includes('6.1')) {
+      if (c.greenChemistryRating === 'Red' || c.storageClass?.includes('6.1') || c.storageClass?.includes('Toxic')) {
         counts[ind].highRisk += 1;
       }
     });
@@ -121,141 +130,141 @@ export default function DashboardOverview({
           <div>
             <div className="flex items-center space-x-2">
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-950 text-cyan-400 border border-cyan-800">
-                INDUSTRIAL DIGITAL TWIN
+                ACTIVE FLOOR-SAFETY &amp; COMPLIANCE COPILOT
               </span>
               <span className="text-xs text-slate-400 font-mono">
-                Real-Time Chemical Safety Command Center
+                SMEs in High-Hazard Sectors (Leather, Pharma, Electroplating, Agro)
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1">
               CHEM-SHIELD <span className="text-cyan-400">Control Room</span>
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mt-1 leading-relaxed">
-              Intelligent Chemical Compatibility, 3D Warehouse Segregation, ETP Wastewater Modeling, and Industrial Disaster Response across Leather Tanning, Pharmaceuticals, Cosmetics, and Processing Industries.
+              Industrial chemical safety digital twin featuring multi-variable reaction simulation, 2D floor distance segregation, zero-typing label scanning, and native-language floor SOPs.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
             <button
-              onClick={() => onNavigate('digital-twin')}
+              onClick={() => onNavigate('mixing-sandbox')}
               className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 text-xs font-bold rounded-xl flex items-center space-x-2 shadow-lg shadow-cyan-500/20 transition hover:scale-105"
             >
-              <Box className="w-4 h-4" />
-              <span>Launch 3D Digital Twin</span>
+              <Zap className="w-4 h-4" />
+              <span>Mixing &amp; ETP Sandbox</span>
             </button>
             <button
-              onClick={() => onNavigate('emergency')}
-              className="px-4 py-2.5 bg-red-950/60 hover:bg-red-900/60 text-red-200 text-xs font-bold rounded-xl border border-red-500/40 flex items-center space-x-2 transition"
+              onClick={onOpenScannerModal}
+              className="px-4 py-2.5 bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 text-xs font-bold rounded-xl border border-cyan-500/50 flex items-center space-x-2 transition"
             >
-              <Flame className="w-4 h-4 text-red-400" />
-              <span>Incident Drills</span>
+              <Camera className="w-4 h-4 text-cyan-400" />
+              <span>Scan Drum Label</span>
             </button>
             <button
-              onClick={onOpenReportModal}
+              onClick={() => onNavigate('multilingual-sop')}
               className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl border border-slate-800 flex items-center space-x-2 transition"
             >
-              <FileText className="w-4 h-4 text-cyan-400" />
-              <span>Audit Dossier</span>
+              <Languages className="w-4 h-4 text-emerald-400" />
+              <span>Floor SOPs (हिं/मरा)</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 4 CORE 3D SIMULATION DIGITAL TWIN QUICK LAUNCHERS */}
+      {/* 4 CORE ACTIVE FLOOR-SAFETY LAUNCHERS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        {/* Launcher 1: 3D Digital Twin */}
+        {/* Launcher 1: Module A Mixing Sandbox */}
         <div 
-          onClick={() => onNavigate('digital-twin')}
+          onClick={() => onNavigate('mixing-sandbox')}
           className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
         >
           <div className="flex items-center justify-between">
             <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-              <Box className="w-5 h-5" />
+              <Zap className="w-5 h-5" />
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
-              Three.js WebGL
+              Module A
             </span>
           </div>
           <div>
             <h4 className="font-bold text-slate-100 text-sm group-hover:text-cyan-300 transition flex items-center justify-between">
-              <span>3D Industrial Complex</span>
+              <span>Reaction &amp; ETP Sandbox</span>
               <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition" />
             </h4>
             <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
-              Virtual chemical manufacturing facility with clickable tanks, reactors, and live SCADA telemetry.
+              Model concentration, volume, temp &amp; pH. Live toxic plumes, thermodynamic spikes &amp; 3-pipe ETP verification.
             </p>
           </div>
         </div>
 
-        {/* Launcher 2: Warehouse Planner */}
+        {/* Launcher 2: Module B 2D Warehouse Floor Planner */}
         <div 
-          onClick={() => onNavigate('warehouse-planner')}
+          onClick={() => onNavigate('warehouse-floor')}
           className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
         >
           <div className="flex items-center justify-between">
             <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-              <Building2 className="w-5 h-5" />
+              <Ruler className="w-5 h-5" />
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
-              NFPA 400
+              Module B
             </span>
           </div>
           <div>
             <h4 className="font-bold text-slate-100 text-sm group-hover:text-emerald-300 transition flex items-center justify-between">
-              <span>Warehouse Segregation</span>
+              <span>2D Floor Segregation</span>
               <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
             </h4>
             <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
-              Pallet rack layout simulator, adjacent conflict auditor, and automated layout optimizer.
+              Calculates Euclidean grid distances. Red pulsing warning rings for incompatible drums closer than 6.0m.
             </p>
           </div>
         </div>
 
-        {/* Launcher 3: Emergency Drills */}
+        {/* Launcher 3: Module C Zero-Typing Label Scanner */}
         <div 
-          onClick={() => onNavigate('emergency')}
-          className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-red-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
+          onClick={onOpenScannerModal}
+          className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
         >
           <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
-              <Siren className="w-5 h-5 animate-pulse" />
+            <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
+              <Camera className="w-5 h-5" />
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800">
-              6 Scenarios
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">
+              Module C
             </span>
           </div>
           <div>
-            <h4 className="font-bold text-slate-100 text-sm group-hover:text-red-300 transition flex items-center justify-between">
-              <span>Emergency Response</span>
-              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-red-400 transition" />
+            <h4 className="font-bold text-slate-100 text-sm group-hover:text-purple-300 transition flex items-center justify-between">
+              <span>Drum Label Scanner</span>
+              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-purple-400 transition" />
             </h4>
             <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
-              Interactive OSHA 1910.120 disaster decision trainer with vapor dispersion and incident scoring.
+              Mobile camera OCR with Gemini Vision + PubChem lookup. Instant SAFE or INCOMPATIBLE storage banner.
             </p>
           </div>
         </div>
 
-        {/* Launcher 4: ETP Simulator */}
+        {/* Launcher 4: Module D Multilingual Floor SOPs & MPCB */}
         <div 
-          onClick={() => onNavigate('etp')}
+          onClick={() => onNavigate('multilingual-sop')}
           className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/60 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2"
         >
           <div className="flex items-center justify-between">
             <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-              <Droplets className="w-5 h-5" />
+              <Languages className="w-5 h-5" />
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
-              EPA Standard
+              Module D
             </span>
           </div>
           <div>
             <h4 className="font-bold text-slate-100 text-sm group-hover:text-cyan-300 transition flex items-center justify-between">
-              <span>ETP Wastewater Twin</span>
+              <span>Floor SOPs &amp; MPCB Audit</span>
               <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition" />
             </h4>
             <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
-              Catalytic sulfide oxidation, chromium hydroxide precipitation, and real-time kinetic curves.
+              English, Hindi, Marathi floor guides with Web Speech audio playback + 1-click official MPCB inspection report.
             </p>
           </div>
         </div>
@@ -277,7 +286,7 @@ export default function DashboardOverview({
           </div>
           <div className="my-2">
             <span className="text-3xl font-black text-white font-mono">{totalChemicals}</span>
-            <p className="text-[11px] text-slate-400 mt-0.5">Across 4 industrial sectors</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">Across Leather, Pharma, Plating, Agro</p>
           </div>
           <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px]">
             <span className="text-slate-400">Empirically Verified:</span>
@@ -377,7 +386,7 @@ export default function DashboardOverview({
               </p>
             </div>
             <span className="text-xs font-mono text-slate-400 hidden sm:block">
-              OSHA / CAMEO Segmented
+              OSHA / CPCB Segmented
             </span>
           </div>
 
@@ -434,7 +443,7 @@ export default function DashboardOverview({
 
           <div className="text-center">
             <span className="text-[10px] font-mono text-slate-500">
-              Sulfide &amp; Acid sumps isolated by physical air gap
+              Sulfide &amp; Cyanide sumps isolated by physical air gap
             </span>
           </div>
         </div>

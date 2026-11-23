@@ -12,8 +12,10 @@ import {
   FileText, 
   Plus, 
   AlertOctagon, 
-  Siren, 
-  Bell 
+  Camera, 
+  Ruler, 
+  Zap, 
+  Languages 
 } from 'lucide-react';
 
 export default function Navbar({ 
@@ -21,6 +23,7 @@ export default function Navbar({
   setActiveTab, 
   onOpenAddModal, 
   onOpenReportModal,
+  onOpenScannerModal,
   inventoryCount = 0,
   incompatibleCount = 0,
   bayViolationCount = 0
@@ -29,14 +32,17 @@ export default function Navbar({
 
   const NAV_ITEMS = [
     { id: 'dashboard', label: 'Command Center', icon: LayoutDashboard },
+    { id: 'mixing-sandbox', label: 'Reaction & ETP Sandbox', icon: Zap, badge: 'What-If' },
+    { id: 'warehouse-floor', label: '2D Floor Segregation', icon: Ruler, badge: 'NFPA 6m' },
+    { id: 'multilingual-sop', label: 'Floor SOPs & MPCB', icon: Languages, badge: 'Audio' },
     { id: 'digital-twin', label: '3D Digital Twin', icon: Box, badge: 'WebGL' },
     { id: 'inventory', label: 'Chemical Laboratory', icon: FlaskConical, count: inventoryCount },
-    { id: 'compatibility', label: 'Compatibility Analyzer', icon: Layers, alert: incompatibleCount > 0 },
-    { id: 'warehouse-planner', label: 'Warehouse Planner', icon: Building2, alert: bayViolationCount > 0 },
-    { id: 'emergency', label: 'Emergency Response', icon: Flame, badge: 'Drill' },
+    { id: 'compatibility', label: 'Compatibility Matrix', icon: Layers, alert: incompatibleCount > 0 },
+    { id: 'warehouse-planner', label: 'Warehouse Bays', icon: Building2, alert: bayViolationCount > 0 },
+    { id: 'emergency', label: 'Emergency Drills', icon: Flame, badge: 'HAZWOPER' },
     { id: 'etp', label: 'ETP Simulator', icon: Droplets, badge: 'Kinetics' },
     { id: 'ai-risk', label: 'AI Risk Intelligence', icon: Brain },
-    { id: 'reports', label: 'Reports & Analytics', icon: FileText }
+    { id: 'reports', label: 'Regulatory Audit', icon: FileText }
   ];
 
   return (
@@ -58,17 +64,17 @@ export default function Navbar({
                   CHEM-<span className="text-cyan-400">SHIELD</span>
                 </span>
                 <span className="px-1.5 py-0.5 rounded text-[9px] font-black tracking-widest uppercase bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 font-mono">
-                  3D TWIN v4.0
+                  SME COPILOT v5.0
                 </span>
               </div>
               <p className="text-[10px] text-slate-400 font-mono hidden md:block">
-                Industrial Safety & Simulation Platform
+                Industrial Safety &amp; Floor Compliance Digital Twin
               </p>
             </div>
           </div>
 
           {/* Desktop Navigation Scrollable Strip */}
-          <nav className="hidden lg:flex items-center space-x-1 bg-slate-950/90 p-1 rounded-2xl border border-slate-800/80 backdrop-blur-md overflow-x-auto max-w-[62%]">
+          <nav className="hidden lg:flex items-center space-x-1 bg-slate-950/90 p-1 rounded-2xl border border-slate-800/80 backdrop-blur-md overflow-x-auto max-w-[60%]">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -111,11 +117,21 @@ export default function Navbar({
           {/* Action Buttons Right Strip */}
           <div className="flex items-center space-x-2">
             
+            {/* Scan Drum Label Button */}
+            <button
+              onClick={onOpenScannerModal}
+              className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/60 text-cyan-300 text-xs font-bold flex items-center space-x-1.5 transition shadow-md shadow-cyan-950/40"
+              title="Scan drum label using phone camera or upload image"
+            >
+              <Camera className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Scan Label</span>
+            </button>
+
             {/* Alert Indicator */}
             {totalAlerts > 0 && (
               <button
                 onClick={() => setActiveTab('compatibility')}
-                className="hidden sm:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-red-950/50 border border-red-500/40 text-red-300 text-xs font-mono font-bold hover:bg-red-900/60 transition"
+                className="hidden xl:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-red-950/50 border border-red-500/40 text-red-300 text-xs font-mono font-bold hover:bg-red-900/60 transition"
                 title={`${incompatibleCount} incompatibilities & ${bayViolationCount} storage bay violations active`}
               >
                 <AlertOctagon className="w-3.5 h-3.5 text-red-400 animate-pulse" />

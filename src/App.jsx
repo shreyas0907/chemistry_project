@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from './components/Navbar';
 import DashboardOverview from './components/DashboardOverview';
+import MixingSandbox from './components/MixingSandbox';
+import WarehouseFloorPlanner from './components/WarehouseFloorPlanner';
+import MultilingualSopViewer from './components/MultilingualSopViewer';
+import LabelScannerModal from './components/LabelScannerModal';
 import ThreeDigitalTwin from './components/ThreeDigitalTwin';
 import CompatibilityChecker from './components/CompatibilityChecker';
 import InventoryManager from './components/InventoryManager';
@@ -8,11 +12,6 @@ import WarehousePlanner from './components/WarehousePlanner';
 import EmergencyResponseTrainer from './components/EmergencyResponseTrainer';
 import EtpSimulator from './components/EtpSimulator';
 import AiRiskEngine from './components/AiRiskEngine';
-import IndustryModules from './components/IndustryModules';
-import SegregationSystem from './components/SegregationSystem';
-import AccidentSimulator from './components/AccidentSimulator';
-import AiSafetyAssistant from './components/AiSafetyAssistant';
-import EnvironmentalModule from './components/EnvironmentalModule';
 import AddCompoundModal from './components/AddCompoundModal';
 import ContainerQrModal from './components/ContainerQrModal';
 import ReportGeneratorModal from './components/ReportGeneratorModal';
@@ -21,7 +20,7 @@ import { INITIAL_INDUSTRIAL_INVENTORY } from './data/industryChemicals';
 import { evaluateMultiChemicalCompatibility, detectStorageBayViolations } from './services/chemicalSafetyEngine';
 import { FileText, Download, ShieldCheck, AlertTriangle, Layers, Building2, Flame } from 'lucide-react';
 
-const STORAGE_KEY = 'chem_shield_industrial_inventory_v5_master';
+const STORAGE_KEY = 'chem_shield_industrial_inventory_v6_active_copilot';
 
 export default function App() {
   const [inventory, setInventory] = useState(() => {
@@ -40,12 +39,13 @@ export default function App() {
   });
 
   // Active view tab:
-  // 'dashboard' | 'digital-twin' | 'inventory' | 'compatibility' | 'warehouse-planner' | 'emergency' | 'etp' | 'ai-risk' | 'reports'
+  // 'dashboard' | 'mixing-sandbox' | 'warehouse-floor' | 'multilingual-sop' | 'digital-twin' | 'inventory' | 'compatibility' | 'warehouse-planner' | 'emergency' | 'etp' | 'ai-risk' | 'reports'
   const [activeTab, setActiveTab] = useState('dashboard');
   
   // Modals state
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isScannerModalOpen, setIsScannerModalOpen] = useState(false);
   const [qrModalChemical, setQrModalChemical] = useState(null);
   const [detailCompound, setDetailCompound] = useState(null);
 
@@ -86,7 +86,7 @@ export default function App() {
   };
 
   const handleResetDefaults = () => {
-    if (window.confirm('Reset inventory back to the verified industrial formulary (covering Leather Tanning, Pharma, Cosmetics, and General Chemical)? Custom additions will be replaced.')) {
+    if (window.confirm('Reset inventory back to the verified industrial formulary (covering Leather Tanning, Pharma, Electroplating, Agrochemicals, Cosmetics, and General Chemical)? Custom additions will be replaced.')) {
       setInventory(INITIAL_INDUSTRIAL_INVENTORY);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_INDUSTRIAL_INVENTORY));
     }
@@ -101,6 +101,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         onOpenAddModal={() => setIsAddModalOpen(true)}
         onOpenReportModal={() => setIsReportModalOpen(true)}
+        onOpenScannerModal={() => setIsScannerModalOpen(true)}
         inventoryCount={inventory.length}
         incompatibleCount={globalIncompatibilities.length}
         bayViolationCount={bayViolations.length}
@@ -115,11 +116,36 @@ export default function App() {
             inventory={inventory}
             onNavigate={(tab) => setActiveTab(tab)}
             onOpenReportModal={() => setIsReportModalOpen(true)}
+            onOpenScannerModal={() => setIsScannerModalOpen(true)}
             onSelectChemical={(chem) => setDetailCompound(chem)}
           />
         )}
 
-        {/* Tab 2: 3D Digital Twin (Three.js WebGL Facility) */}
+        {/* Tab: Module A - Interactive Chemical Mixing & ETP "What-If" Sandbox */}
+        {activeTab === 'mixing-sandbox' && (
+          <MixingSandbox
+            inventory={inventory}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
+          />
+        )}
+
+        {/* Tab: Module B - 2D Warehouse Storage & Segregation Floor Planner */}
+        {activeTab === 'warehouse-floor' && (
+          <WarehouseFloorPlanner
+            inventory={inventory}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
+          />
+        )}
+
+        {/* Tab: Module D - Multilingual Floor SOPs & MPCB/CPCB Audit Report */}
+        {activeTab === 'multilingual-sop' && (
+          <MultilingualSopViewer
+            inventory={inventory}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
+          />
+        )}
+
+        {/* Tab: 3D Digital Twin (Three.js WebGL Facility) */}
         {activeTab === 'digital-twin' && (
           <ThreeDigitalTwin
             onSelectChemical={(chem) => setDetailCompound(chem)}
@@ -127,7 +153,7 @@ export default function App() {
           />
         )}
 
-        {/* Tab 3: Chemical Laboratory & Inventory Management */}
+        {/* Tab: Chemical Laboratory & Inventory Management */}
         {activeTab === 'inventory' && (
           <InventoryManager
             inventory={inventory}
@@ -141,7 +167,7 @@ export default function App() {
           />
         )}
 
-        {/* Tab 4: Chemical Compatibility Analyzer Engine */}
+        {/* Tab: Chemical Compatibility Analyzer Engine */}
         {activeTab === 'compatibility' && (
           <CompatibilityChecker
             inventory={inventory}
@@ -149,7 +175,7 @@ export default function App() {
           />
         )}
 
-        {/* Tab 5: 3D Chemical Warehouse Segregation Planner */}
+        {/* Tab: Warehouse Bays System */}
         {activeTab === 'warehouse-planner' && (
           <WarehousePlanner
             inventory={inventory}
@@ -157,21 +183,21 @@ export default function App() {
           />
         )}
 
-        {/* Tab 6: Industrial Emergency Response Trainer */}
+        {/* Tab: Industrial Emergency Response Trainer */}
         {activeTab === 'emergency' && (
           <EmergencyResponseTrainer
             onNavigate={(tab) => setActiveTab(tab)}
           />
         )}
 
-        {/* Tab 7: Wastewater Treatment (ETP) Simulator */}
+        {/* Tab: Wastewater Treatment (ETP) Simulator */}
         {activeTab === 'etp' && (
           <EtpSimulator
             onNavigate={(tab) => setActiveTab(tab)}
           />
         )}
 
-        {/* Tab 8: AI Chemical Risk Intelligence */}
+        {/* Tab: AI Chemical Risk Intelligence */}
         {activeTab === 'ai-risk' && (
           <AiRiskEngine
             inventory={inventory}
@@ -179,7 +205,7 @@ export default function App() {
           />
         )}
 
-        {/* Tab 9: Safety Reports & Compliance Analytics */}
+        {/* Tab: Safety Reports & Compliance Analytics */}
         {activeTab === 'reports' && (
           <div className="space-y-6">
             <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
@@ -189,27 +215,35 @@ export default function App() {
                     <span className="px-2.5 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 text-xs font-mono font-bold uppercase">
                       AUDIT &amp; REGULATORY COMPLIANCE
                     </span>
-                    <span className="text-slate-400 text-xs font-mono">OSHA 1910.1200 / EPA RMP / ECHA REACH</span>
+                    <span className="text-slate-400 text-xs font-mono">OSHA 1910.1200 / MPCB / CPCB / EPA RMP</span>
                   </div>
                   <h2 className="text-xl sm:text-2xl font-black text-slate-100 flex items-center gap-2 mt-1">
                     <FileText className="w-6 h-6 text-cyan-400" />
-                    Industrial Safety Dossiers &amp; Analytics
+                    Industrial Safety Dossiers &amp; Compliance Analytics
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-                    Generate, preview, and download official chemical safety audits, segregation reports, and emergency drill dossiers.
+                    Generate, preview, and download official chemical safety audits, segregation plans, and emergency drill dossiers.
                   </p>
                 </div>
 
-                <button
-                  onClick={() => setIsReportModalOpen(true)}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 font-bold text-xs flex items-center space-x-2 transition shadow-lg shadow-cyan-500/20"
-                >
-                  <FileText className="w-4 h-4" />
-                  <span>Configure Custom Audit Report</span>
-                </button>
+                <div className="flex gap-2.5">
+                  <button
+                    onClick={() => setActiveTab('multilingual-sop')}
+                    className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center space-x-2 transition border border-slate-700"
+                  >
+                    <span>MPCB / CPCB Print View</span>
+                  </button>
+                  <button
+                    onClick={() => setIsReportModalOpen(true)}
+                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 font-bold text-xs flex items-center space-x-2 transition shadow-lg shadow-cyan-500/20"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Configure Custom Audit Report</span>
+                  </button>
+                </div>
               </div>
 
-              {/* 5 Downloadable Report Cards */}
+              {/* Downloadable Report Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                 {[
                   {
@@ -221,10 +255,10 @@ export default function App() {
                     color: 'text-cyan-400'
                   },
                   {
-                    title: 'Warehouse Segregation Plan',
-                    code: 'WSP-NFPA400',
-                    desc: 'Storage bay allocation audit with adjacent conflict detection, TRGS 510 class segregation, and safety scores.',
-                    type: 'PDF / CSV',
+                    title: 'MPCB / CPCB Inspection Summary',
+                    code: 'MPCB-MSIHC-2026',
+                    desc: 'Official hazardous chemicals inventory and ETP 3-pipe segregation certificate formatted for state pollution control boards.',
+                    type: 'Printable / PDF',
                     icon: Building2,
                     color: 'text-emerald-400'
                   },
@@ -271,7 +305,13 @@ export default function App() {
                       </div>
 
                       <button
-                        onClick={() => setIsReportModalOpen(true)}
+                        onClick={() => {
+                          if (rep.code.includes('MPCB')) {
+                            setActiveTab('multilingual-sop');
+                          } else {
+                            setIsReportModalOpen(true);
+                          }
+                        }}
                         className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition"
                       >
                         <Download className="w-3.5 h-3.5 text-cyan-400" />
@@ -287,6 +327,14 @@ export default function App() {
         )}
 
       </main>
+
+      {/* Module C: Zero-Typing Chemical Label Scanner Modal (Gemini Vision) */}
+      <LabelScannerModal
+        isOpen={isScannerModalOpen}
+        onClose={() => setIsScannerModalOpen(false)}
+        inventory={inventory}
+        onAddScannedToInventory={handleAddCompound}
+      />
 
       {/* Add Custom Chemical Modal */}
       <AddCompoundModal
@@ -323,16 +371,16 @@ export default function App() {
           <div className="flex items-center space-x-2 text-slate-400">
             <span className="font-bold text-white">CHEM-SHIELD</span>
             <span>•</span>
-            <span>Intelligent Chemical Compatibility, 3D Digital Twin & Industrial Safety Platform</span>
+            <span>Active Floor-Safety &amp; Compliance Copilot for High-Hazard Industrial SMEs</span>
           </div>
           <div className="font-mono text-cyan-400 text-[11px] flex items-center space-x-2">
-            <span>Three.js WebGL</span>
-            <span>•</span>
-            <span>NOAA CAMEO</span>
+            <span>Gemini 2.5 Flash</span>
             <span>•</span>
             <span>PubChem PUG REST</span>
             <span>•</span>
-            <span>OSHA 1910.1200</span>
+            <span>NOAA CAMEO</span>
+            <span>•</span>
+            <span>MPCB / CPCB Compliant</span>
           </div>
         </div>
       </footer>

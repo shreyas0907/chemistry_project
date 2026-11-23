@@ -412,6 +412,51 @@
       "emergencyPrecautions": "Flush fouled lines with hot isopropanol or non-ionic surfactant solution.",
       "authoritativeSource": "Cosmetics Formulation Guidelines / NOAA CAMEO",
       "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "cyanides",
+      "group2": "acids_inorganic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Chemical Reactivity & Storage Incompatibility",
+      "hazardCode": "T, H",
+      "hazardTitle": "FATAL ACCIDENT HAZARD: Instantaneous Lethal Hydrogen Cyanide (HCN) Gas Release",
+      "chemicalEquation": "2 KCN + H2SO4 -> K2SO4 + 2 HCN(g) ^",
+      "description": "Contact between cyanide salts (Potassium cyanide, Sodium cyanide, Copper cyanide) and inorganic acids (Sulfuric, Hydrochloric, Nitric) generates lethal, rapid-acting Hydrogen Cyanide (HCN) gas. HCN inhibits cytochrome c oxidase, blocking cellular oxygen utilization and causing loss of consciousness within 10-15 seconds and fatal respiratory arrest within 2-5 minutes at >100 ppm.",
+      "segregationAction": "MANDATORY ELECTROPLATING ISOLATION: Cyanide salts must be stored in a locked, dry, ventilated cabinet with continuous HCN gas sniffers. Must NEVER share trenches, sumps, or drainage channels with pickling or bright-dip acid baths. Strict 6-meter physical separation with impermeable secondary containment required.",
+      "emergencyPrecautions": "Evacuate upwind immediately. Positive-pressure SCBA and Level A hazmat suit mandatory. Keep Cyanokit (hydroxocobalamin) or amyl nitrite inhalants on standby. Neutralize strictly with alkaline sodium hypochlorite (pH > 11.5), NEVER with acid.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / NIOSH Pocket Guide / OSHA 1910.1200",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "cyanides",
+      "group2": "acids_organic",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Chemical Reactivity & Lethal Gas Evolution",
+      "hazardCode": "T, H",
+      "hazardTitle": "Lethal Hydrogen Cyanide (HCN) Gas Liberation via Organic Acid Contact",
+      "chemicalEquation": "KCN + CH3COOH -> CH3COOK + HCN(g) ^",
+      "description": "Organic acids readily protonate cyanide solutions and salts, driving equilibrium towards toxic, volatile gaseous HCN (boiling point 25.6°C).",
+      "segregationAction": "Isolate cyanide salts from all organic acids and organic solvents.",
+      "emergencyPrecautions": "Immediate upwind evacuation. Continuous HCN monitor detection.",
+      "authoritativeSource": "NOAA CAMEO Chemicals / EPA Plating Regulations",
+      "confidence": "Verified Empirical (Authoritative)"
+    },
+    {
+      "group1": "oxidizers_strong",
+      "group2": "alcohols",
+      "status": "INCOMPATIBLE",
+      "severity": "DANGER",
+      "incompatibilityType": "Violent Redox & Combustion",
+      "hazardCode": "F, E",
+      "hazardTitle": "Flash Vapor Fire & Detonation Explosion",
+      "chemicalEquation": "2 C3H7OH + 9 H2O2 -> 6 CO2 + 14 H2O (Flash Explosion)",
+      "description": "Strong oxidizers (Hydrogen peroxide 50%, Nitric acid, Ammonium nitrate) act as violent ignition sources for polar flammable alcohols (Isopropanol, Ethanol), causing explosive boiling, vessel rupture, and flash fires.",
+      "segregationAction": "Store oxidizers in fire-rated masonry bunker physically isolated from flammable solvent stores.",
+      "emergencyPrecautions": "Deploy alcohol-resistant foam (AR-AFFF) and deluge cooling sprays on adjacent drum shells.",
+      "authoritativeSource": "NFPA 400 / NOAA CAMEO Chemicals",
+      "confidence": "Verified Empirical (Authoritative)"
     }
   ]
 }
