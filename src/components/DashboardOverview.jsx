@@ -25,7 +25,8 @@ import {
   Camera,
   Ruler,
   Languages,
-  Printer
+  Printer,
+  Recycle
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -146,11 +147,18 @@ export default function DashboardOverview({
 
           <div className="flex flex-wrap items-center gap-2.5">
             <button
-              onClick={() => onNavigate('mixing-sandbox')}
-              className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 text-xs font-bold rounded-xl flex items-center space-x-2 shadow-lg shadow-cyan-500/20 transition hover:scale-105"
+              onClick={() => onNavigate('waste-reuse')}
+              className="px-4 py-2.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 text-xs font-bold rounded-xl flex items-center space-x-2 shadow-lg shadow-emerald-500/25 transition hover:scale-105"
             >
-              <Zap className="w-4 h-4" />
-              <span>Mixing &amp; ETP Sandbox</span>
+              <Recycle className="w-4 h-4" />
+              <span>Waste Reuse Hub</span>
+            </button>
+            <button
+              onClick={() => onNavigate('mixing-sandbox')}
+              className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-cyan-300 text-xs font-bold rounded-xl border border-cyan-500/40 flex items-center space-x-2 transition"
+            >
+              <Zap className="w-4 h-4 text-cyan-400" />
+              <span>Mixing Sandbox</span>
             </button>
             <button
               onClick={onOpenScannerModal}
@@ -170,9 +178,33 @@ export default function DashboardOverview({
         </div>
       </div>
 
-      {/* 4 CORE ACTIVE FLOOR-SAFETY LAUNCHERS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 5 CORE ACTIVE FLOOR-SAFETY & VALORISATION LAUNCHERS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         
+        {/* Launcher: Industrial Waste Valorisation & Reuse Hub */}
+        <div 
+          onClick={() => onNavigate('waste-reuse')}
+          className="p-4 rounded-2xl bg-gradient-to-b from-[#091820] to-[#07131a] border border-emerald-500/40 hover:border-emerald-400 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2 relative overflow-hidden"
+        >
+          <div className="flex items-center justify-between">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 group-hover:scale-110 transition">
+              <Recycle className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold uppercase">
+              Circular Hub
+            </span>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-100 text-sm group-hover:text-emerald-300 transition flex items-center justify-between">
+              <span>Waste Reuse Hub</span>
+              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
+            </h4>
+            <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
+              Cross-industry waste valorisation across Leather, Cosmetics, and Pharma. 20 streams &amp; 78+ circular pathways.
+            </p>
+          </div>
+        </div>
+
         {/* Launcher 1: Module A Mixing Sandbox */}
         <div 
           onClick={() => onNavigate('mixing-sandbox')}

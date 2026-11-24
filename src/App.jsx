@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from './components/Navbar';
 import DashboardOverview from './components/DashboardOverview';
+import WasteReuseHub from './components/WasteReuseHub';
 import MixingSandbox from './components/MixingSandbox';
 import WarehouseFloorPlanner from './components/WarehouseFloorPlanner';
 import MultilingualSopViewer from './components/MultilingualSopViewer';
@@ -117,6 +118,13 @@ export default function App() {
             onNavigate={(tab) => setActiveTab(tab)}
             onOpenReportModal={() => setIsReportModalOpen(true)}
             onOpenScannerModal={() => setIsScannerModalOpen(true)}
+            onSelectChemical={(chem) => setDetailCompound(chem)}
+          />
+        )}
+
+        {/* Tab: Industrial Waste Valorisation & Reuse Hub */}
+        {activeTab === 'waste-reuse' && (
+          <WasteReuseHub
             onSelectChemical={(chem) => setDetailCompound(chem)}
           />
         )}
