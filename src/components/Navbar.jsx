@@ -16,8 +16,7 @@ import {
   Ruler, 
   Zap, 
   Languages,
-  Recycle,
-  Database
+  Recycle
 } from 'lucide-react';
 
 export default function Navbar({ 
@@ -34,8 +33,7 @@ export default function Navbar({
 
   const NAV_ITEMS = [
     { id: 'dashboard', label: 'Command Center', icon: LayoutDashboard },
-    { id: 'waste-reuse', label: 'Waste Analysis', icon: Recycle, badge: 'Batch review' },
-    { id: 'waste-knowledge', label: 'Waste Reuse Guide', icon: Database, badge: '20 streams' },
+    { id: 'waste-reuse', label: 'Waste Reuse Hub', icon: Recycle, badge: 'Circular' },
     { id: 'mixing-sandbox', label: 'Reaction & ETP Sandbox', icon: Zap, badge: 'What-If' },
     { id: 'warehouse-floor', label: '2D Floor Segregation', icon: Ruler, badge: 'NFPA 6m' },
     { id: 'multilingual-sop', label: 'Floor SOPs & MPCB', icon: Languages, badge: 'Audio' },
