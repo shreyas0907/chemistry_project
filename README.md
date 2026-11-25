@@ -1,12 +1,12 @@
-# CHEM-SHIELD 🛡️⚗️
-### Intelligent Chemical Compatibility, Segregation & Industrial Safety Platform
+# ChemAssist 🛡️⚗️
+### Smart Chemical Inventory • Safer Waste Management • Chemical Intelligence
 
 [![Live Production Site](https://img.shields.io/badge/Live%20Demo-chem--shield--platform.netlify.app-10B981?style=for-the-badge&logo=netlify)](https://chem-shield-platform.netlify.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/shreyas0907/chemistry_project)
 
 **Live Production Deployment:** [https://chem-shield-platform.netlify.app](https://chem-shield-platform.netlify.app)
 
-**CHEM-SHIELD** is a professional, modern, scientifically reliable, and fully functional industrial chemical safety platform designed to prevent catastrophic industrial accidents caused by accidental mixing, incompatible storage, unsafe handling, and improper wastewater disposal.
+**ChemAssist** is a clean, modern, scientifically reliable, and fully functional industrial chemical safety platform designed to assist industrial facilities with chemical inventory management, QR-based tracking, regulatory chemical waste segregation (Leather, Pharma, Cosmetics), and verified chemical compatibility prediction.
 
 The platform identifies incompatible chemical substances before they come into contact, evaluates their thermodynamic and toxicological hazards, recommends safe segregation distances, and provides scientifically authoritative safety information across four high-hazard processing industries.
 
@@ -179,9 +179,9 @@ npm run preview
 ---
 
 ## ⚖️ Scientific & Safety Disclaimer
-*CHEM-SHIELD is an industrial safety decision-support tool. It is designed to assist chemical safety engineers, plant managers, and environmental officers in identifying hazards and verifying storage arrangements. The platform does not replace official Safety Data Sheets (SDS), facility-specific hazard evaluations, or the counsel of certified Industrial Hygienists (CIH) and licensed Chemical Engineers.*
+*ChemAssist is an industrial safety decision-support tool. It is designed to assist chemical safety engineers, plant managers, and environmental officers in identifying hazards and verifying storage arrangements. The platform does not replace official Safety Data Sheets (SDS), facility-specific hazard evaluations, or the counsel of certified Industrial Hygienists (CIH) and licensed Chemical Engineers.*
 
 ---
 
 ## 📄 License
-Released under the MIT License. Copyright © 2024–2026 CHEM-SHIELD Contributors.
+Released under the MIT License. Copyright © 2024–2026 ChemAssist Contributors.

@@ -1,5 +1,5 @@
 /**
- * CHEM-SHIELD INDUSTRY-SPECIFIC CHEMICAL WASTE MANAGEMENT DATABASE
+ * ChemAssist INDUSTRY-SPECIFIC CHEMICAL WASTE MANAGEMENT DATABASE
  * Strictly covers THREE core industrial sectors:
  * 1. Leather Industry
  * 2. Pharmaceutical Industry

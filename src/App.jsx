@@ -128,9 +128,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
             <div className="w-5 h-5 rounded bg-slate-900 flex items-center justify-center text-teal-400 font-bold text-[10px]">
-              CS
+              CA
             </div>
-            <span className="font-semibold text-slate-800">CHEM-SHIELD</span>
+            <span className="font-semibold text-slate-800">ChemAssist</span>
             <span>•</span>
             <span>Smart Chemical Inventory &bull; Safer Waste Management &bull; Chemical Intelligence</span>
           </div>

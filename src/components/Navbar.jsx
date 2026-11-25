@@ -26,7 +26,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900">
-                  CHEM-<span className="text-teal-600">SHIELD</span>
+                  Chem<span className="text-teal-600">Assist</span>
                 </span>
                 <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-slate-100 text-slate-600 border border-slate-200">
                   Industrial Safety Platform

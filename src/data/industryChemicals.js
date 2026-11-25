@@ -1,5 +1,5 @@
 /**
- * CHEM-SHIELD Master Industrial Chemical Formulary & Inventory (55+ Chemicals)
+ * ChemAssist Master Industrial Chemical Formulary & Inventory (55+ Chemicals)
  * Thoroughly verified dataset spanning 4 Core Processing Industries:
  * 1. Leather Tanning and Processing
  * 2. Pharmaceutical Manufacturing

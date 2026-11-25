@@ -943,7 +943,7 @@ function QrScannerDialog({ inventory = [], onClose, onUpdateStock }) {
                 </div>
               </div>
               <p className="text-[11px] text-center text-slate-500">
-                Point your camera at a CHEM-SHIELD container QR code label.
+                Point your camera at a ChemAssist container QR code label.
               </p>
             </div>
           )}
@@ -1138,7 +1138,7 @@ function PrintQrDialog({ chemical, onClose }) {
             <div className="flex items-center justify-between border-b-2 border-slate-900 pb-2">
               <div>
                 <span className="text-[10px] font-bold font-mono tracking-widest text-slate-500 block uppercase">
-                  CHEM-SHIELD INVENTORY
+                  CHEMASSIST INVENTORY
                 </span>
                 <span className="text-xs font-bold text-slate-900">INDUSTRIAL CONTAINER LABEL</span>
               </div>

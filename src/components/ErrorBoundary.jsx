@@ -12,7 +12,7 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('CHEM-SHIELD Runtime Exception:', error, errorInfo);
+    console.error('ChemAssist Runtime Exception:', error, errorInfo);
     this.setState({ errorInfo });
   }
 
@@ -47,7 +47,7 @@ export default class ErrorBoundary extends React.Component {
                   An Unexpected Application State Occurred
                 </h1>
                 <p className="text-xs text-slate-500">
-                  CHEM-SHIELD Industrial Safety Platform
+                  ChemAssist Industrial Safety Platform
                 </p>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default class ErrorBoundary extends React.Component {
             </div>
 
             <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-between font-mono">
-              <span>CHEM-SHIELD</span>
+              <span>ChemAssist</span>
               <span>OSHA 1910.1200 / CPCB Compliant</span>
             </div>
           </div>

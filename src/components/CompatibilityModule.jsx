@@ -361,7 +361,7 @@ export default function CompatibilityModule() {
 
       {/* Safety Notice */}
       <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 text-[11px] text-slate-500 leading-relaxed">
-        <strong>Scientific Accuracy and Chemical Safety Rules:</strong> CHEM-SHIELD uses an authoritative, curated reaction database. The platform does not generate unverified equations or assume that unverified mixtures are safe. Never physically mix unknown, untested, or incompatible chemical substances. The predictions displayed above are for industrial storage safety and containment decision support only.
+        <strong>Scientific Accuracy and Chemical Safety Rules:</strong> ChemAssist uses an authoritative, curated reaction database. The platform does not generate unverified equations or assume that unverified mixtures are safe. Never physically mix unknown, untested, or incompatible chemical substances. The predictions displayed above are for industrial storage safety and containment decision support only.
       </div>
 
     </div>

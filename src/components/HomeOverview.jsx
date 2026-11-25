@@ -28,7 +28,7 @@ export default function HomeOverview({
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-            CHEM-SHIELD is an industrial safety platform built to solve real-world problems in chemical manufacturing and processing facilities. Designed with scientific accuracy and ease of operation.
+            ChemAssist is an industrial safety platform built to solve real-world problems in chemical manufacturing and processing facilities. Designed with scientific accuracy and ease of operation.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">

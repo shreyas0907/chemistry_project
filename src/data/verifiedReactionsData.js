@@ -1,5 +1,5 @@
 /**
- * CHEM-SHIELD CURATED VERIFIED REACTION & COMPATIBILITY DATABASE
+ * ChemAssist CURATED VERIFIED REACTION & COMPATIBILITY DATABASE
  * Contains authoritative, empirically verified chemical reactions and compatibility assessments.
  * Sources: NOAA CAMEO Chemicals, CRC Handbook of Chemistry and Physics, PubChem, NIOSH Pocket Guide.
  * 
