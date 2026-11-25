@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, RotateCcw, ShieldAlert, Trash2, Home } from 'lucide-react';
+import { AlertTriangle, RotateCcw, ShieldAlert, Trash2 } from 'lucide-react';
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('CHEM-SHIELD Uncaught Runtime Exception:', error, errorInfo);
+    console.error('CHEM-SHIELD Runtime Exception:', error, errorInfo);
     this.setState({ errorInfo });
   }
 
@@ -33,65 +33,61 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-[#050a0e] text-slate-100 flex items-center justify-center p-6 selection:bg-cyan-500 selection:text-black">
-          <div className="max-w-2xl w-full bg-[#08121a] border border-red-500/40 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
-            <div className="flex items-center space-x-3 pb-4 border-b border-slate-800">
-              <div className="p-3 rounded-xl bg-red-950/60 border border-red-500/50 text-red-400">
-                <ShieldAlert className="w-8 h-8 animate-pulse" />
+        <div className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center p-6">
+          <div className="max-w-xl w-full bg-white border border-red-200 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5">
+            <div className="flex items-center space-x-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-red-50 text-red-600 border border-red-200">
+                <ShieldAlert className="w-6 h-6" />
               </div>
               <div>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-red-950 text-red-400 border border-red-800">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-red-100 text-red-700">
                   SYSTEM RECOVERY MODE
                 </span>
-                <h1 className="text-xl sm:text-2xl font-black text-white mt-1">
-                  CHEM-SHIELD Encountered an Unexpected State
+                <h1 className="text-lg font-bold text-slate-900 mt-0.5">
+                  An Unexpected Application State Occurred
                 </h1>
-                <p className="text-xs text-slate-400 font-mono">
-                  Active Floor-Safety &amp; Compliance Copilot
+                <p className="text-xs text-slate-500">
+                  CHEM-SHIELD Industrial Safety Platform
                 </p>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-black/60 border border-slate-800 font-mono text-xs text-red-300 space-y-2 overflow-x-auto">
-              <div className="flex items-center space-x-2 text-slate-400 font-bold">
-                <AlertTriangle className="w-4 h-4 text-amber-400" />
-                <span>Error Diagnostic Trace:</span>
-              </div>
-              <p className="text-red-400 font-semibold">{this.state.error?.toString() || 'Unknown runtime error'}</p>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs text-red-700 space-y-1.5 overflow-x-auto">
+              <p className="font-semibold">{this.state.error?.toString() || 'Unknown runtime error'}</p>
               {this.state.errorInfo?.componentStack && (
-                <pre className="text-[10px] text-slate-400 max-h-40 overflow-y-auto pt-2 border-t border-slate-800/80">
+                <pre className="text-[10px] text-slate-500 max-h-32 overflow-y-auto pt-2 border-t border-slate-200">
                   {this.state.errorInfo.componentStack}
                 </pre>
               )}
             </div>
 
             <div className="space-y-3">
-              <p className="text-xs text-slate-300">
-                This can occur if an outdated local browser cache is incompatible with new safety formulas. You can reload the app, or clear your cached state to restore clean verified industrial defaults.
+              <p className="text-xs text-slate-600">
+                You can reload the application, or clear saved browser storage to restore clean default stock records.
               </p>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-wrap gap-2.5 pt-1">
                 <button
                   onClick={this.handleReload}
-                  className="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold text-xs flex items-center space-x-2 transition shadow-lg shadow-cyan-600/30"
+                  className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs flex items-center space-x-1.5 transition"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reload Application</span>
                 </button>
 
                 <button
                   onClick={this.handleReset}
-                  className="px-5 py-2.5 rounded-xl bg-red-950/80 hover:bg-red-900 border border-red-500/60 text-red-200 font-bold text-xs flex items-center space-x-2 transition"
+                  className="px-4 py-2 rounded-lg bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-semibold text-xs flex items-center space-x-1.5 transition"
                 >
-                  <Trash2 className="w-4 h-4 text-red-400" />
-                  <span>Clear Cache &amp; Reset Verified Data</span>
+                  <Trash2 className="w-3.5 h-3.5 text-red-600" />
+                  <span>Reset to Default State</span>
                 </button>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-500 flex items-center justify-between font-mono">
-              <span>CHEM-SHIELD SME COPILOT v5.0</span>
-              <span>OSHA 1910.1200 / NFPA 400 Compliant</span>
+            <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-between font-mono">
+              <span>CHEM-SHIELD</span>
+              <span>OSHA 1910.1200 / CPCB Compliant</span>
             </div>
           </div>
         </div>

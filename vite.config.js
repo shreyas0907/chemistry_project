@@ -48,8 +48,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'three-vendor': ['three'],
-          'recharts-vendor': ['recharts'],
           'lucide-vendor': ['lucide-react']
         }
       }

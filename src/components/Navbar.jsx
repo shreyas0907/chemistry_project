@@ -1,192 +1,120 @@
 import React from 'react';
-import { 
-  ShieldCheck, 
-  LayoutDashboard, 
-  Box, 
-  FlaskConical, 
-  Layers, 
-  Building2, 
-  Flame, 
-  Droplets, 
-  Brain, 
-  FileText, 
-  Plus, 
-  AlertOctagon, 
-  Camera, 
-  Ruler, 
-  Zap, 
-  Languages,
-  Recycle
-} from 'lucide-react';
+import { ShieldCheck, Package, Trash2, Layers, Home, Menu, X } from 'lucide-react';
 
-export default function Navbar({ 
-  activeTab, 
-  setActiveTab, 
-  onOpenAddModal, 
-  onOpenReportModal,
-  onOpenScannerModal,
-  inventoryCount = 0,
-  incompatibleCount = 0,
-  bayViolationCount = 0
-}) {
-  const totalAlerts = incompatibleCount + bayViolationCount;
+export default function Navbar({ activeTab, setActiveTab }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const NAV_ITEMS = [
-    { id: 'dashboard', label: 'Command Center', icon: LayoutDashboard },
-    { id: 'waste-reuse', label: 'Waste Reuse Hub', icon: Recycle, badge: 'Circular' },
-    { id: 'mixing-sandbox', label: 'Reaction & ETP Sandbox', icon: Zap, badge: 'What-If' },
-    { id: 'warehouse-floor', label: '2D Floor Segregation', icon: Ruler, badge: 'NFPA 6m' },
-    { id: 'multilingual-sop', label: 'Floor SOPs & MPCB', icon: Languages, badge: 'Audio' },
-    { id: 'digital-twin', label: '3D Digital Twin', icon: Box, badge: 'WebGL' },
-    { id: 'inventory', label: 'Chemical Laboratory', icon: FlaskConical, count: inventoryCount },
-    { id: 'compatibility', label: 'Compatibility Matrix', icon: Layers, alert: incompatibleCount > 0 },
-    { id: 'warehouse-planner', label: 'Warehouse Bays', icon: Building2, alert: bayViolationCount > 0 },
-    { id: 'emergency', label: 'Emergency Drills', icon: Flame, badge: 'HAZWOPER' },
-    { id: 'etp', label: 'ETP Simulator', icon: Droplets, badge: 'Kinetics' },
-    { id: 'ai-risk', label: 'AI Risk Intelligence', icon: Brain },
-    { id: 'reports', label: 'Regulatory Audit', icon: FileText }
+    { id: 'inventory', label: 'Chemical Inventory', icon: Package },
+    { id: 'waste', label: 'Industry Waste Management', icon: Trash2 },
+    { id: 'compatibility', label: 'Chemical Compatibility', icon: Layers }
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#060c10]/95 backdrop-blur-md border-b border-cyan-500/20 shadow-2xl">
+    <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-2">
+        <div className="flex items-center justify-between h-16">
           
-          {/* Logo & Brand Identity */}
+          {/* Logo & Tagline */}
           <div 
-            onClick={() => setActiveTab('dashboard')} 
-            className="flex items-center space-x-3 cursor-pointer select-none group flex-shrink-0"
+            onClick={() => setActiveTab('home')}
+            className="flex items-center space-x-3 cursor-pointer select-none group"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-emerald-400 to-cyan-300 flex items-center justify-center text-slate-950 shadow-lg shadow-cyan-500/20 font-black group-hover:scale-105 transition">
-              <ShieldCheck className="w-5 h-5 stroke-[2.5]" />
+            <div className="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-sm group-hover:bg-slate-800 transition">
+              <ShieldCheck className="w-5 h-5 text-teal-400 stroke-[2.5]" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="text-base sm:text-lg font-black tracking-tight text-white font-sans">
-                  CHEM-<span className="text-cyan-400">SHIELD</span>
+                <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900">
+                  CHEM-<span className="text-teal-600">SHIELD</span>
                 </span>
-                <span className="px-1.5 py-0.5 rounded text-[9px] font-black tracking-widest uppercase bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 font-mono">
-                  SME COPILOT v5.0
+                <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-slate-100 text-slate-600 border border-slate-200">
+                  Industrial Safety Platform
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-mono hidden md:block">
-                Industrial Safety &amp; Floor Compliance Digital Twin
+              <p className="text-[11px] text-slate-500 hidden md:block">
+                Smart Chemical Inventory. Safer Waste Management. Chemical Intelligence.
               </p>
             </div>
           </div>
 
-          {/* Desktop Navigation Scrollable Strip */}
-          <nav className="hidden lg:flex items-center space-x-1 bg-slate-950/90 p-1 rounded-2xl border border-slate-800/80 backdrop-blur-md overflow-x-auto max-w-[60%]">
+          {/* Desktop Navigation Links - ONLY THREE CORE MODULES */}
+          <nav className="hidden md:flex items-center space-x-1">
+            <button
+              onClick={() => setActiveTab('home')}
+              className={`px-3 py-2 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 ${
+                activeTab === 'home'
+                  ? 'bg-slate-100 text-slate-900 font-bold'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              }`}
+            >
+              <Home className="w-4 h-4 text-slate-500" />
+              <span>Overview</span>
+            </button>
+
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
-
               return (
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all whitespace-nowrap relative ${
+                  className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center space-x-2 ${
                     isActive
-                      ? 'bg-gradient-to-r from-cyan-500 to-emerald-400 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-900/80'
+                      ? 'bg-slate-900 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-teal-400' : 'text-slate-500'}`} />
                   <span>{item.label}</span>
-
-                  {item.count !== undefined && (
-                    <span className={`px-1.5 py-0.2 rounded-full font-mono text-[9px] ${
-                      isActive ? 'bg-slate-950/30 text-slate-950 font-bold' : 'bg-slate-900 text-slate-400'
-                    }`}>
-                      {item.count}
-                    </span>
-                  )}
-
-                  {item.badge && !isActive && (
-                    <span className="text-[8px] font-mono px-1 py-0.2 rounded bg-slate-900 text-cyan-300 border border-cyan-800/40">
-                      {item.badge}
-                    </span>
-                  )}
-
-                  {item.alert && (
-                    <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping absolute -top-0.5 -right-0.5" />
-                  )}
                 </button>
               );
             })}
           </nav>
 
-          {/* Action Buttons Right Strip */}
-          <div className="flex items-center space-x-2">
-            
-            {/* Scan Drum Label Button */}
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
             <button
-              onClick={onOpenScannerModal}
-              className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/60 text-cyan-300 text-xs font-bold flex items-center space-x-1.5 transition shadow-md shadow-cyan-950/40"
-              title="Scan drum label using phone camera or upload image"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-slate-600 hover:bg-slate-100"
             >
-              <Camera className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="hidden sm:inline">Scan Label</span>
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-
-            {/* Alert Indicator */}
-            {totalAlerts > 0 && (
-              <button
-                onClick={() => setActiveTab('compatibility')}
-                className="hidden xl:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-red-950/50 border border-red-500/40 text-red-300 text-xs font-mono font-bold hover:bg-red-900/60 transition"
-                title={`${incompatibleCount} incompatibilities & ${bayViolationCount} storage bay violations active`}
-              >
-                <AlertOctagon className="w-3.5 h-3.5 text-red-400 animate-pulse" />
-                <span>{totalAlerts} ALERTS</span>
-              </button>
-            )}
-
-            {/* Quick Add Substance */}
-            <button
-              onClick={onOpenAddModal}
-              className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-bold flex items-center space-x-1.5 transition"
-            >
-              <Plus className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="hidden sm:inline">Register Chemical</span>
-            </button>
-
-            {/* Quick Export Report */}
-            <button
-              onClick={onOpenReportModal}
-              className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 font-bold text-xs flex items-center space-x-1.5 transition shadow-lg shadow-cyan-500/20"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Audit Dossier</span>
-            </button>
-
           </div>
 
         </div>
+      </div>
 
-        {/* Mobile / Tablet Scrollable Secondary Subnav */}
-        <div className="flex lg:hidden items-center space-x-1.5 py-2 overflow-x-auto border-t border-slate-900">
+      {/* Mobile Dropdown Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1 text-xs">
+          <button
+            onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
+            className={`w-full text-left px-3 py-2.5 rounded-lg font-semibold flex items-center space-x-2 ${
+              activeTab === 'home' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50'
+            }`}
+          >
+            <Home className="w-4 h-4" />
+            <span>Overview &amp; Modules</span>
+          </button>
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
-
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-medium flex items-center space-x-1 whitespace-nowrap shrink-0 transition ${
-                  isActive
-                    ? 'bg-cyan-500 text-slate-950 font-bold'
-                    : 'text-slate-400 hover:text-white bg-slate-950 border border-slate-900'
+                onClick={() => { setActiveTab(item.id); setMobileMenuOpen(false); }}
+                className={`w-full text-left px-3 py-2.5 rounded-lg font-semibold flex items-center space-x-2 ${
+                  isActive ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
-                <Icon className="w-3 h-3" />
+                <Icon className="w-4 h-4" />
                 <span>{item.label}</span>
               </button>
             );
           })}
         </div>
-
-      </div>
+      )}
     </header>
   );
 }

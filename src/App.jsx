@@ -1,27 +1,47 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import DashboardOverview from './components/DashboardOverview';
-import WasteReuseHub from './components/WasteReuseHub';
-import MixingSandbox from './components/MixingSandbox';
-import WarehouseFloorPlanner from './components/WarehouseFloorPlanner';
-import MultilingualSopViewer from './components/MultilingualSopViewer';
-import LabelScannerModal from './components/LabelScannerModal';
-import ThreeDigitalTwin from './components/ThreeDigitalTwin';
-import CompatibilityChecker from './components/CompatibilityChecker';
-import InventoryManager from './components/InventoryManager';
-import WarehousePlanner from './components/WarehousePlanner';
-import EmergencyResponseTrainer from './components/EmergencyResponseTrainer';
-import EtpSimulator from './components/EtpSimulator';
-import AiRiskEngine from './components/AiRiskEngine';
-import AddCompoundModal from './components/AddCompoundModal';
-import ContainerQrModal from './components/ContainerQrModal';
-import ReportGeneratorModal from './components/ReportGeneratorModal';
-import CompoundDetailModal from './components/CompoundDetailModal';
+import HomeOverview from './components/HomeOverview';
+import InventoryModule from './components/InventoryModule';
+import IndustryWasteModule from './components/IndustryWasteModule';
+import CompatibilityModule from './components/CompatibilityModule';
 import { INITIAL_INDUSTRIAL_INVENTORY } from './data/industryChemicals';
-import { evaluateMultiChemicalCompatibility, detectStorageBayViolations } from './services/chemicalSafetyEngine';
-import { FileText, Download, ShieldCheck, AlertTriangle, Layers, Building2, Flame } from 'lucide-react';
+import { ShieldCheck, Package, Trash2, Layers } from 'lucide-react';
 
-const STORAGE_KEY = 'chem_shield_industrial_inventory_v6_active_copilot';
+const STORAGE_KEY = 'chem_shield_inventory_v8_redesign_core3';
+
+// Enriches baseline chemicals with realistic batch numbers and expiry mix
+function getInitialInventoryWithExpiryMix() {
+  const today = new Date();
+  
+  return INITIAL_INDUSTRIAL_INVENTORY.map((chem, idx) => {
+    let expDate = chem.expiryDate || '2027-12-31';
+    
+    // Inject a realistic spread: 
+    // Chemicals at index 3 and 7 are expired
+    // Chemicals at index 1 and 5 are expiring soon (within 20 days)
+    if (idx === 3) {
+      const past = new Date(today.getTime() - 45 * 24 * 60 * 60 * 1000);
+      expDate = past.toISOString().split('T')[0];
+    } else if (idx === 7) {
+      const past = new Date(today.getTime() - 120 * 24 * 60 * 60 * 1000);
+      expDate = past.toISOString().split('T')[0];
+    } else if (idx === 1) {
+      const soon = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+      expDate = soon.toISOString().split('T')[0];
+    } else if (idx === 5) {
+      const soon = new Date(today.getTime() + 25 * 24 * 60 * 60 * 1000);
+      expDate = soon.toISOString().split('T')[0];
+    }
+
+    return {
+      ...chem,
+      batchNumber: chem.batchNumber || chem.sdsRef || `LOT-2024-${String(idx + 101).padStart(3, '0')}`,
+      purchaseDate: chem.purchaseDate || '2024-03-15',
+      expiryDate: expDate,
+      qrIdentifier: `CS-LOT-${chem.id.slice(-6).toUpperCase()}`
+    };
+  });
+}
 
 export default function App() {
   const [inventory, setInventory] = useState(() => {
@@ -29,366 +49,98 @@ export default function App() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length >= INITIAL_INDUSTRIAL_INVENTORY.length) {
+        if (Array.isArray(parsed) && parsed.length > 0) {
           return parsed;
         }
       }
     } catch (e) {
-      console.warn('Could not read local storage, using initial industrial formulary:', e);
+      console.warn('Could not load localStorage inventory, falling back to verified baseline:', e);
     }
-    return INITIAL_INDUSTRIAL_INVENTORY;
+    return getInitialInventoryWithExpiryMix();
   });
 
-  // Active view tab:
-  // 'dashboard' | 'mixing-sandbox' | 'warehouse-floor' | 'multilingual-sop' | 'digital-twin' | 'inventory' | 'compatibility' | 'warehouse-planner' | 'emergency' | 'etp' | 'ai-risk' | 'reports'
-  const [activeTab, setActiveTab] = useState('dashboard');
-  
-  // Modals state
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isScannerModalOpen, setIsScannerModalOpen] = useState(false);
-  const [qrModalChemical, setQrModalChemical] = useState(null);
-  const [detailCompound, setDetailCompound] = useState(null);
+  // Active view tab: ONLY 'home' | 'inventory' | 'waste' | 'compatibility'
+  const [activeTab, setActiveTab] = useState('home');
 
-  // Sync to local storage
+  // Sync inventory changes to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(inventory));
     } catch (e) {
-      console.error('Failed to persist inventory to local storage:', e);
+      console.error('Failed to persist inventory state to localStorage:', e);
     }
   }, [inventory]);
 
-  // Global Incompatibility count for navbar alert badge
-  const globalIncompatibilities = useMemo(() => {
-    const res = evaluateMultiChemicalCompatibility(inventory);
-    const pairs = res?.pairInteractions || res?.pairAssessments || [];
-    return pairs.filter(p => p && p.status === 'RED');
-  }, [inventory]);
-
-  // Storage bay conflict violations count
-  const bayViolations = useMemo(() => {
-    return detectStorageBayViolations(inventory);
-  }, [inventory]);
-
-  // Handlers
-  const handleAddCompound = (newCompound) => {
-    setInventory(prev => [newCompound, ...prev]);
+  // Inventory CRUD Handlers
+  const handleAddChemical = (newChem) => {
+    setInventory(prev => [newChem, ...prev]);
   };
 
-  const handleUpdateCompound = (id, updates) => {
+  const handleUpdateChemical = (id, updates) => {
     setInventory(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
   };
 
-  const handleDeleteCompound = (id) => {
-    if (window.confirm('Are you sure you want to remove this chemical substance from the facility inventory?')) {
-      setInventory(prev => prev.filter(c => c.id !== id));
-    }
-  };
-
-  const handleResetDefaults = () => {
-    if (window.confirm('Reset inventory back to the verified industrial formulary (covering Leather Tanning, Pharma, Electroplating, Agrochemicals, Cosmetics, and General Chemical)? Custom additions will be replaced.')) {
-      setInventory(INITIAL_INDUSTRIAL_INVENTORY);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_INDUSTRIAL_INVENTORY));
-    }
+  const handleDeleteChemical = (id) => {
+    setInventory(prev => prev.filter(c => c.id !== id));
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#050a0e] text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans antialiased">
       
-      {/* Top Industrial Control Room Navigation */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        onOpenAddModal={() => setIsAddModalOpen(true)}
-        onOpenReportModal={() => setIsReportModalOpen(true)}
-        onOpenScannerModal={() => setIsScannerModalOpen(true)}
-        inventoryCount={inventory.length}
-        incompatibleCount={globalIncompatibilities.length}
-        bayViolationCount={bayViolations.length}
-      />
+      {/* Navigation Header */}
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* Main Container Viewport */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      {/* Main Viewport Container */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        {/* Tab 1: Command Center */}
-        {activeTab === 'dashboard' && (
-          <DashboardOverview
-            inventory={inventory}
+        {/* VIEW 0: Homepage Executive Overview */}
+        {activeTab === 'home' && (
+          <HomeOverview
             onNavigate={(tab) => setActiveTab(tab)}
-            onOpenReportModal={() => setIsReportModalOpen(true)}
-            onOpenScannerModal={() => setIsScannerModalOpen(true)}
-            onSelectChemical={(chem) => setDetailCompound(chem)}
+            inventoryCount={inventory.length}
           />
         )}
 
-        {/* Tab: Industrial Waste Valorisation & Reuse Hub */}
-        {activeTab === 'waste-reuse' && (
-          <WasteReuseHub
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-          />
-        )}
-
-        {/* Tab: Module A - Interactive Chemical Mixing & ETP "What-If" Sandbox */}
-        {activeTab === 'mixing-sandbox' && (
-          <MixingSandbox
-            inventory={inventory}
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-          />
-        )}
-
-        {/* Tab: Module B - 2D Warehouse Storage & Segregation Floor Planner */}
-        {activeTab === 'warehouse-floor' && (
-          <WarehouseFloorPlanner
-            inventory={inventory}
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-          />
-        )}
-
-        {/* Tab: Module D - Multilingual Floor SOPs & MPCB/CPCB Audit Report */}
-        {activeTab === 'multilingual-sop' && (
-          <MultilingualSopViewer
-            inventory={inventory}
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-          />
-        )}
-
-        {/* Tab: 3D Digital Twin (Three.js WebGL Facility) */}
-        {activeTab === 'digital-twin' && (
-          <ThreeDigitalTwin
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-            onNavigate={(tab) => setActiveTab(tab)}
-          />
-        )}
-
-        {/* Tab: Chemical Laboratory & Inventory Management */}
+        {/* VIEW 1: Chemical Inventory Management with QR Scanning */}
         {activeTab === 'inventory' && (
-          <InventoryManager
+          <InventoryModule
             inventory={inventory}
-            onOpenAddModal={() => setIsAddModalOpen(true)}
-            onOpenQrModal={(chem) => setQrModalChemical(chem)}
-            onSelectCompound={(chem) => setDetailCompound(chem)}
-            onDeleteCompound={handleDeleteCompound}
-            onUpdateCompound={handleUpdateCompound}
-            onResetDefaults={handleResetDefaults}
-            onNavigateToCompatibility={() => setActiveTab('compatibility')}
+            onAddChemical={handleAddChemical}
+            onUpdateChemical={handleUpdateChemical}
+            onDeleteChemical={handleDeleteChemical}
           />
         )}
 
-        {/* Tab: Chemical Compatibility Analyzer Engine */}
+        {/* VIEW 2: Industry-Specific Waste Management (Leather, Pharma, Cosmetics) */}
+        {activeTab === 'waste' && (
+          <IndustryWasteModule />
+        )}
+
+        {/* VIEW 3: Chemical Compatibility and Reaction Product Prediction */}
         {activeTab === 'compatibility' && (
-          <CompatibilityChecker
-            inventory={inventory}
-            onSelectCompoundForDetail={(comp) => setDetailCompound(comp)}
-          />
-        )}
-
-        {/* Tab: Warehouse Bays System */}
-        {activeTab === 'warehouse-planner' && (
-          <WarehousePlanner
-            inventory={inventory}
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-          />
-        )}
-
-        {/* Tab: Industrial Emergency Response Trainer */}
-        {activeTab === 'emergency' && (
-          <EmergencyResponseTrainer
-            onNavigate={(tab) => setActiveTab(tab)}
-          />
-        )}
-
-        {/* Tab: Wastewater Treatment (ETP) Simulator */}
-        {activeTab === 'etp' && (
-          <EtpSimulator
-            onNavigate={(tab) => setActiveTab(tab)}
-          />
-        )}
-
-        {/* Tab: AI Chemical Risk Intelligence */}
-        {activeTab === 'ai-risk' && (
-          <AiRiskEngine
-            inventory={inventory}
-            onSelectChemical={(chem) => setDetailCompound(chem)}
-          />
-        )}
-
-        {/* Tab: Safety Reports & Compliance Analytics */}
-        {activeTab === 'reports' && (
-          <div className="space-y-6">
-            <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800">
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 text-xs font-mono font-bold uppercase">
-                      AUDIT &amp; REGULATORY COMPLIANCE
-                    </span>
-                    <span className="text-slate-400 text-xs font-mono">OSHA 1910.1200 / MPCB / CPCB / EPA RMP</span>
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-black text-slate-100 flex items-center gap-2 mt-1">
-                    <FileText className="w-6 h-6 text-cyan-400" />
-                    Industrial Safety Dossiers &amp; Compliance Analytics
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-                    Generate, preview, and download official chemical safety audits, segregation plans, and emergency drill dossiers.
-                  </p>
-                </div>
-
-                <div className="flex gap-2.5">
-                  <button
-                    onClick={() => setActiveTab('multilingual-sop')}
-                    className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center space-x-2 transition border border-slate-700"
-                  >
-                    <span>MPCB / CPCB Print View</span>
-                  </button>
-                  <button
-                    onClick={() => setIsReportModalOpen(true)}
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 font-bold text-xs flex items-center space-x-2 transition shadow-lg shadow-cyan-500/20"
-                  >
-                    <FileText className="w-4 h-4" />
-                    <span>Configure Custom Audit Report</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Downloadable Report Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
-                {[
-                  {
-                    title: 'Chemical Compatibility Audit',
-                    code: 'CCA-2026',
-                    desc: 'Full pairwise matrix report covering all active inventory substances with CAMEO reactivity flags and reaction equations.',
-                    type: 'PDF / CSV',
-                    icon: Layers,
-                    color: 'text-cyan-400'
-                  },
-                  {
-                    title: 'MPCB / CPCB Inspection Summary',
-                    code: 'MPCB-MSIHC-2026',
-                    desc: 'Official hazardous chemicals inventory and ETP 3-pipe segregation certificate formatted for state pollution control boards.',
-                    type: 'Printable / PDF',
-                    icon: Building2,
-                    color: 'text-emerald-400'
-                  },
-                  {
-                    title: 'Critical Incompatibility Alert File',
-                    code: 'CIA-RED',
-                    desc: 'Emergency dossier listing all RED-status critical reaction hazards (H2S gas, runaway exotherm, flash fires).',
-                    type: 'JSON / CSV',
-                    icon: AlertTriangle,
-                    color: 'text-red-400'
-                  },
-                  {
-                    title: 'Effluent ETP Compliance Summary',
-                    code: 'ETP-EPA',
-                    desc: 'Sulfide catalytic oxidation and chromium precipitation kinetic verification against EPA/CPCB industrial limits.',
-                    type: 'PDF / Data Table',
-                    icon: ShieldCheck,
-                    color: 'text-cyan-400'
-                  },
-                  {
-                    title: 'HAZWOPER Emergency Drill Report',
-                    code: 'EM-DRILL-06',
-                    desc: 'Incident response drill scores, decision trees, chronological action logs, and OSHA commander ratings.',
-                    type: 'JSON / Text',
-                    icon: Flame,
-                    color: 'text-amber-400'
-                  }
-                ].map((rep, idx) => {
-                  const Icon = rep.icon;
-                  return (
-                    <div key={idx} className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-slate-700 transition space-y-3 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
-                            {rep.code}
-                          </span>
-                          <span className="text-[10px] font-mono text-cyan-400">{rep.type}</span>
-                        </div>
-                        <h4 className="font-bold text-slate-100 text-sm mt-2 flex items-center gap-1.5">
-                          <Icon className={`w-4 h-4 ${rep.color}`} />
-                          <span>{rep.title}</span>
-                        </h4>
-                        <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">{rep.desc}</p>
-                      </div>
-
-                      <button
-                        onClick={() => {
-                          if (rep.code.includes('MPCB')) {
-                            setActiveTab('multilingual-sop');
-                          } else {
-                            setIsReportModalOpen(true);
-                          }
-                        }}
-                        className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition"
-                      >
-                        <Download className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Download Dossier</span>
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-
-            </div>
-          </div>
+          <CompatibilityModule />
         )}
 
       </main>
 
-      {/* Module C: Zero-Typing Chemical Label Scanner Modal (Gemini Vision) */}
-      <LabelScannerModal
-        isOpen={isScannerModalOpen}
-        onClose={() => setIsScannerModalOpen(false)}
-        inventory={inventory}
-        onAddScannedToInventory={handleAddCompound}
-      />
-
-      {/* Add Custom Chemical Modal */}
-      <AddCompoundModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onSave={handleAddCompound}
-      />
-
-      {/* Container QR Label & Live Bay Audit Modal */}
-      <ContainerQrModal
-        chemical={qrModalChemical}
-        isOpen={!!qrModalChemical}
-        onClose={() => setQrModalChemical(null)}
-        allInventory={inventory}
-      />
-
-      {/* Scientific & Regulatory Audit Report Generator Modal */}
-      <ReportGeneratorModal
-        isOpen={isReportModalOpen}
-        onClose={() => setIsReportModalOpen(false)}
-        inventory={inventory}
-      />
-
-      {/* Chemical Dossier Slide-Over Inspector */}
-      <CompoundDetailModal
-        compound={detailCompound}
-        isOpen={!!detailCompound}
-        onClose={() => setDetailCompound(null)}
-      />
-
-      {/* Industrial Control Room Footer */}
-      <footer className="border-t border-slate-800/80 bg-[#060c10]/95 backdrop-blur-md py-4 text-center text-xs text-slate-500 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center space-x-2 text-slate-400">
-            <span className="font-bold text-white">CHEM-SHIELD</span>
+      {/* Industrial Footer */}
+      <footer className="border-t border-slate-200 bg-white py-6 mt-12 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-5 h-5 rounded bg-slate-900 flex items-center justify-center text-teal-400 font-bold text-[10px]">
+              CS
+            </div>
+            <span className="font-semibold text-slate-800">CHEM-SHIELD</span>
             <span>•</span>
-            <span>Active Floor-Safety &amp; Compliance Copilot for High-Hazard Industrial SMEs</span>
+            <span>Smart Chemical Inventory &bull; Safer Waste Management &bull; Chemical Intelligence</span>
           </div>
-          <div className="font-mono text-cyan-400 text-[11px] flex items-center space-x-2">
-            <span>Gemini 2.5 Flash</span>
+
+          <div className="flex items-center space-x-4 text-[11px] font-mono">
+            <span>OSHA 1910.1200</span>
             <span>•</span>
-            <span>PubChem PUG REST</span>
+            <span>CPCB / MPCB Waste Rules</span>
             <span>•</span>
-            <span>NOAA CAMEO</span>
-            <span>•</span>
-            <span>MPCB / CPCB Compliant</span>
+            <span>NOAA CAMEO Reference</span>
           </div>
         </div>
       </footer>
