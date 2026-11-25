@@ -156,7 +156,7 @@ export default function WasteReuseHub({ onSelectChemical }) {
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1 flex items-center gap-2.5">
               <Recycle className="w-7 h-7 text-emerald-400" />
-              <span>Industrial Waste <span className="text-emerald-400">Analysis &amp; Recommendations</span></span>
+              <span>Industrial Waste <span className="text-emerald-400">Reuse Hub</span></span>
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mt-1 leading-relaxed">
               Intelligent waste valorisation engine. Identifies industrial side-streams, evaluates chemical hazards, and matches secondary resources across industrial boundaries.

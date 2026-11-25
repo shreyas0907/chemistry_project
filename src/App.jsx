@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from './components/Navbar';
 import DashboardOverview from './components/DashboardOverview';
 import WasteReuseHub from './components/WasteReuseHub';
-import WasteValorisationExplorer from './components/WasteValorisationExplorer';
 import MixingSandbox from './components/MixingSandbox';
 import WarehouseFloorPlanner from './components/WarehouseFloorPlanner';
 import MultilingualSopViewer from './components/MultilingualSopViewer';
@@ -128,11 +127,6 @@ export default function App() {
           <WasteReuseHub
             onSelectChemical={(chem) => setDetailCompound(chem)}
           />
-        )}
-
-        {/* Additive, deterministic waste-stream knowledge base */}
-        {activeTab === 'waste-knowledge' && (
-          <WasteValorisationExplorer />
         )}
 
         {/* Tab: Module A - Interactive Chemical Mixing & ETP "What-If" Sandbox */}
