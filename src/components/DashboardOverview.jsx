@@ -26,7 +26,8 @@ import {
   Ruler,
   Languages,
   Printer,
-  Recycle
+  Recycle,
+  Database
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -151,7 +152,14 @@ export default function DashboardOverview({
               className="px-4 py-2.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 text-xs font-bold rounded-xl flex items-center space-x-2 shadow-lg shadow-emerald-500/25 transition hover:scale-105"
             >
               <Recycle className="w-4 h-4" />
-              <span>Waste Reuse Hub</span>
+              <span>Waste Analysis</span>
+            </button>
+            <button
+              onClick={() => onNavigate('waste-knowledge')}
+              className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-emerald-300 text-xs font-bold rounded-xl border border-emerald-700/50 flex items-center space-x-2 transition"
+            >
+              <Database className="w-4 h-4 text-emerald-400" />
+              <span>Waste Reuse Guide</span>
             </button>
             <button
               onClick={() => onNavigate('mixing-sandbox')}
@@ -181,7 +189,7 @@ export default function DashboardOverview({
       {/* 5 CORE ACTIVE FLOOR-SAFETY & VALORISATION LAUNCHERS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         
-        {/* Launcher: Industrial Waste Valorisation & Reuse Hub */}
+        {/* Launcher: Existing batch waste analysis */}
         <div 
           onClick={() => onNavigate('waste-reuse')}
           className="p-4 rounded-2xl bg-gradient-to-b from-[#091820] to-[#07131a] border border-emerald-500/40 hover:border-emerald-400 cursor-pointer transition-all hover:scale-[1.02] shadow-xl group space-y-2 relative overflow-hidden"
@@ -191,16 +199,16 @@ export default function DashboardOverview({
               <Recycle className="w-5 h-5" />
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold uppercase">
-              Circular Hub
+              Analysis Engine
             </span>
           </div>
           <div>
             <h4 className="font-bold text-slate-100 text-sm group-hover:text-emerald-300 transition flex items-center justify-between">
-              <span>Waste Reuse Hub</span>
+              <span>Waste Analysis</span>
               <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
             </h4>
             <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">
-              Cross-industry waste valorisation across Leather, Cosmetics, and Pharma. 20 streams &amp; 78+ circular pathways.
+              Review a waste batch, see recovery suggestions and check its safety restrictions.
             </p>
           </div>
         </div>
